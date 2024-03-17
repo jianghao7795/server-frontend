@@ -2,14 +2,13 @@
 import { defineComponent, h, provide, ref } from "vue";
 import { RouterView } from "vue-router";
 import type { GlobalTheme } from "naive-ui";
-import { darkTheme, useLoadingBar, useMessage, useNotification, useOsTheme } from "naive-ui";
+import { darkTheme, useLoadingBar, useMessage, useNotification } from "naive-ui";
 import { emitter } from "./utils/common";
 import { useDark, useToggle } from "@vueuse/core";
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
-const isDarkTheme = useOsTheme();
-const theme = ref<GlobalTheme | null>(isDarkTheme.value === "dark" ? darkTheme : null);
+const theme = ref<GlobalTheme | null>(null);
 // const color = computed(() => (theme.value === null ? "#000" : "#fff"));
 // const colorComment = computed(() => (theme.value === null ? "#999" : "#aaa"));
 
