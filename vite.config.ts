@@ -26,8 +26,8 @@ export default defineConfig((userConfig) => {
   return {
     plugins: [
       legacyPlugin({
-        // targets: ["defaults", "not IE 11"],
-        targets: ["Android > 39", "Chrome >= 60", "Safari >= 10.1", "iOS >= 10.3", "Firefox >= 54", "Edge >= 15"],
+        targets: ["defaults", "not IE 11"],
+        // targets: ["Android > 39", "Chrome >= 60", "Safari >= 10.1", "iOS >= 10.3", "Firefox >= 54", "Edge >= 15"],
         renderLegacyChunks: false,
       }),
       // vue(),
