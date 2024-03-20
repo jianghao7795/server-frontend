@@ -130,10 +130,12 @@ onMounted(async () => {
 watch(
   () => route.params.value,
   async (changeValue) => {
-    const sort = Object.keys(colorRef.value)[0];
-    const response = await getArticleSearch({ page: 1, ...route.params, value: changeValue as string, sort });
-    if (response?.code === 0) {
-      data.value = response.data?.list || [];
+    if (changeValue) {
+      const sort = Object.keys(colorRef.value)[0];
+      const response = await getArticleSearch({ page: 1, ...route.params, value: changeValue as string, sort });
+      if (response?.code === 0) {
+        data.value = response.data?.list || [];
+      }
     }
   },
 );
