@@ -9,9 +9,11 @@ export interface Result<T = any> {
   msg: string;
   data: T;
 }
+
+const env = import.meta.env;
 const service: AxiosInstance = axios.create({
-  baseURL: "/api",
-  timeout: 0,
+  baseURL: env.VITE_BASE_API,
+  timeout: 1000,
 });
 
 /* 请求拦截器 */
