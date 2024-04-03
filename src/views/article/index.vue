@@ -40,13 +40,7 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "Article",
-};
-</script>
-
-<script lang="ts" setup>
+<script lang="ts" setup name="Article">
 // import { NList, NThing, NListItem, NSpace, NTag, NButton } from "naive-ui";
 import { onMounted, computed, h } from "vue";
 import { useRouter } from "vue-router";

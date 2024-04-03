@@ -74,13 +74,7 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "Search",
-};
-</script>
-
-<script setup lang="ts">
+<script setup lang="ts" name="Search">
 // import { NList, NThing, NListItem, NSpace, NTag, NButton, NEmpty } from "naive-ui";
 import { ref, onMounted, computed, watch } from "vue";
 import { getArticleSearch } from "@/services/article";

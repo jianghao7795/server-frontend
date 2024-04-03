@@ -1,28 +1,14 @@
 <template>
   <div class="view-content">
     <n-space>
-      <n-button
-        strong
-        secondary
-        round
-        v-for="(item, index) in tagList"
-        :key="item.ID"
-        :type="colorIndex(index)"
-        @click="searchArticle(item.name)"
-      >
+      <n-button strong secondary round v-for="(item, index) in tagList" :key="item.ID" :type="colorIndex(index)" @click="searchArticle(item.name)">
         {{ item.name }}
       </n-button>
     </n-space>
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "Tag",
-};
-</script>
-
-<script lang="ts" setup>
+<script lang="ts" setup name="Tag">
 // import { NSpace, NButton } from "naive-ui";
 import { getTagList } from "@/services/tag";
 import { onMounted, ref } from "vue";

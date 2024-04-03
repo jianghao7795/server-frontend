@@ -2,13 +2,7 @@
   <p>{{ props.imgUrl }}</p>
 </template>
 
-<script lang="ts">
-export default {
-  name: "Content",
-};
-</script>
-
-<script lang="ts" setup>
+<script lang="ts" setup name="Content">
 import { onMounted } from "vue";
 
 const props = defineProps<{ imgUrl: string }>();

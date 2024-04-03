@@ -136,13 +136,7 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "Layout",
-};
-</script>
-
-<script setup lang="ts">
+<script setup lang="ts" name="Layout">
 import { KeepAlive, Transition, onMounted, ref, watch, inject, provide, computed, h } from "vue";
 import type { CSSProperties, Ref } from "vue";
 import type { GlobalTheme, FormInst } from "naive-ui";

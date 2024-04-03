@@ -58,13 +58,7 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "Home",
-};
-</script>
-
-<script setup lang="ts">
+<script setup lang="ts" name="Home">
 // import { NList, NThing, NListItem, NSpace, NTag, NButton, NEmpty } from "naive-ui";
 import { ref, onMounted, computed } from "vue";
 import { getArticleList } from "@/services/article";

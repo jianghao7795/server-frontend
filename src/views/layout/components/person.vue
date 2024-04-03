@@ -1,27 +1,13 @@
 <template>
-  <n-drawer
-    v-model:show="props.active"
-    :width="502"
-    placement="right"
-    v-bind:on-update:show="changeStatus"
-  >
+  <n-drawer v-model:show="props.active" :width="502" placement="right" v-bind:on-update:show="changeStatus">
     <n-drawer-content title="个人信息">
       <template #footer>
         <div>
-          <NButton type="primary" @click="submit" :loading="loading">
-            提交
-          </NButton>
+          <NButton type="primary" @click="submit" :loading="loading">提交</NButton>
         </div>
       </template>
 
-      <n-form
-        ref="formRef"
-        :model="userInfo"
-        :rules="rules"
-        label-placement="left"
-        label-width="auto"
-        require-mark-placement="right-hanging"
-      >
+      <n-form ref="formRef" :model="userInfo" :rules="rules" label-placement="left" label-width="auto" require-mark-placement="right-hanging">
         <n-form-item label="头像" path="header">
           <n-upload
             accept=".png,.jpg,.jpeg,.git"
@@ -46,24 +32,9 @@
   </n-drawer>
 </template>
 
-<script lang="ts">
-export default {
-  name: "Person",
-  data() {
-    return {
-      rules: {},
-    };
-  },
-};
-</script>
-
 <script lang="ts" name="Person" setup>
 import { ref, watch } from "vue";
-import type {
-  FormInst,
-  UploadFileInfo,
-  UploadCustomRequestOptions,
-} from "naive-ui";
+import type { FormInst, UploadFileInfo, UploadCustomRequestOptions } from "naive-ui";
 import { useUserStore } from "@/stores/user";
 import { Base_URL } from "@/common/article";
 import { uploadFile } from "@/services/fileUpload";
@@ -74,6 +45,8 @@ const emits = defineEmits<{ (e: "changeStatus", status: boolean): void }>();
 const changeStatus = (show: boolean) => {
   emits("changeStatus", show);
 };
+
+const rules = ref({});
 
 const loading = ref<boolean>(false);
 const formRef = ref<FormInst | null>(null);
@@ -103,7 +76,7 @@ watch(
       },
     ];
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 const changeCustomRequest = (options: UploadCustomRequestOptions) => {
@@ -121,10 +94,7 @@ const changeCustomRequest = (options: UploadCustomRequestOptions) => {
     });
 };
 
-const onChangeFile = async (e: {
-  file: UploadFileInfo;
-  fileList: UploadFileInfo[];
-}) => {
+const onChangeFile = async (e: { file: UploadFileInfo; fileList: UploadFileInfo[] }) => {
   fileList.value = e.fileList;
 };
 

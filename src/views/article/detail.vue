@@ -27,6 +27,7 @@
           </div>
           <div>日期：{{ changeDate(articleStore.detail?.CreatedAt) }}</div>
           <div>阅读量：{{ articleStore.detail?.reading_quantity }}</div>
+          <div>{{ articleStore.detail?.content }}</div>
         </NSpace>
 
         <n-divider />

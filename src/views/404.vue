@@ -6,7 +6,7 @@
   </n-result>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="404">
 import { useRouter } from "vue-router";
 
 const router = useRouter();

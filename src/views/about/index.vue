@@ -10,13 +10,7 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "About",
-};
-</script>
-
-<script lang="ts" setup>
+<script lang="ts" name="About" setup>
 import Content from "./content.vue";
 import { useUserStore } from "@/stores/user";
 const userStore = useUserStore();
