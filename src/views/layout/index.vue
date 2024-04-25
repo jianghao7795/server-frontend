@@ -481,7 +481,7 @@ onMounted(async () => {
   if (token) {
     await userStore.getUser(async (head_img: string) => {
       const resp = await getImages();
-      if (resp?.code === 0) {
+      if (resp?.code === 200) {
         bgImage.value = resp.data;
       }
     });

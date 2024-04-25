@@ -95,7 +95,7 @@ const changeSort = async (v: string) => {
     colorRef.value = { [v]: true };
   }
   const response = await getArticleSearch({ page: 1, ...route.params, sort: v });
-  if (response?.code === 0) {
+  if (response?.code === 200) {
     data.value = response.data?.list || [];
     colorRef.value = { [v]: true };
   }
@@ -116,7 +116,7 @@ const handleBack = () => {
 onMounted(async () => {
   const sort = Object.keys(colorRef.value)[0];
   const response = await getArticleSearch({ page: 1, ...route.params, sort });
-  if (response?.code === 0) {
+  if (response?.code === 200) {
     data.value = (response.data?.list as API.Article[]) || [];
   }
 });
@@ -127,7 +127,7 @@ watch(
     if (changeValue) {
       const sort = Object.keys(colorRef.value)[0];
       const response = await getArticleSearch({ page: 1, ...route.params, value: changeValue as string, sort });
-      if (response?.code === 0) {
+      if (response?.code === 200) {
         data.value = response.data?.list || [];
       }
     }

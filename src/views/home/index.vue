@@ -77,7 +77,7 @@ const changeUrl = (id: number) => {
 
 onMounted(async () => {
   const response = await getArticleList({ page: 1, is_important: 1 });
-  if (response?.code === 0) {
+  if (response?.code === 200) {
     data.value = response.data?.list as API.Article[];
   }
 });

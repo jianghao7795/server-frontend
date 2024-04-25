@@ -5,7 +5,7 @@ import { useUserStore } from "@/stores/user";
 
 /* 服务器返回数据的的类型，根据接口文档确定 */
 export interface Result<T = any> {
-  code: 0 | 7;
+  code: 200 | 400 | 401 | 403 | 404 | 500;
   msg: string;
   data: T;
 }
@@ -45,24 +45,16 @@ service.interceptors.response.use(
       emitter.emit("closeLoading");
       return Promise.reject(new Error("服务器错误"));
     }
-    const { code, msg, data } = response.data;
+    const { code, data } = response.data;
     // 根据自定义错误码判断请求是否成功
-    if (code === 0) {
+    if (code === 200) {
       // 将组件用的数据返回
       return response.data;
-    } else {
-      // 处理业务错误。
-      // Message.error(message)
-      window.$notification.error({
-        duration: 10000,
-        keepAliveOnHover: true,
-        content: `返回错误: ${msg ? 400 : 500}`,
-        meta: data?.msg || msg,
-      });
-      return Promise.reject(new Error(msg));
     }
+
+    return data;
   },
-  (error: AxiosError) => {
+  (error: AxiosError<Result>) => {
     emitter.emit("closeLoading");
     // console.log(error);
     // 处理 HTTP 网络错误
@@ -87,7 +79,7 @@ service.interceptors.response.use(
     }
     window.$notification.error({
       content: `错误 ${!!status ? status : ""}: ${message}`,
-      meta: error.response?.statusText,
+      meta: error?.response?.data?.msg || error.response?.statusText,
       duration: 10000,
       keepAliveOnHover: true,
     });

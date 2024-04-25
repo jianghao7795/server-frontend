@@ -48,7 +48,7 @@ const submit = () => {
   loading.value = true;
   resetPassword({ ...userPassword.value, id: userStore.currentUser.user.ID })
     .then((resp) => {
-      if (resp.code === 0) {
+      if (resp.code === 200) {
         window.$message.success(resp.msg);
         emits("resetStore");
         emits("changeStatus", false);

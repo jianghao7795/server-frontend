@@ -92,7 +92,7 @@ const requestFile = (options: UploadCustomRequestOptions) => {
   formData.append("file", options.file.file as File, options.file.name);
   uploadFile(formData)
     .then((resp) => {
-      if (resp.code === 0) {
+      if (resp.code === 200) {
         window.$message.success("上传成功");
         userRegister.value.header = resp.data?.file.url as string;
       }

@@ -43,7 +43,7 @@ export const useUserStore = defineStore("user", {
       try {
         const resp = await registerUser(data);
         this.loadingRegister = false;
-        if (resp.code === 0) {
+        if (resp.code === 200) {
           callback();
         } else {
           window.$message.error("注册失败, 请重试");

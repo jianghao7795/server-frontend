@@ -128,7 +128,7 @@ const avatar = computed(() => (articleStore.detail?.user?.headerImg ? Base_URL +
 //     user_id: userStroe.currentUser.user.ID || 0,
 //     user_name: userStroe.currentUser.user.nickName || "测试",
 //   } as Comment.comment);
-//   if (resp?.code === 0) {
+//   if (resp?.code === 200) {
 //     message.success("评论成功");
 //     setTimeout(() => {
 //       let child = undefined;

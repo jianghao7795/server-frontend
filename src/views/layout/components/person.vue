@@ -84,7 +84,7 @@ const changeCustomRequest = (options: UploadCustomRequestOptions) => {
   formData.append("file", options.file.file as File, options.file.name);
   uploadFile(formData)
     .then((resp) => {
-      if (resp.code === 0) {
+      if (resp.code === 200) {
         window.$message.success("上传成功");
         userStore.currentUser.user.headerImg = resp.data?.file.url as string;
       }
@@ -102,7 +102,7 @@ const submit = () => {
   loading.value = true;
   updateUser(userInfo.value)
     .then((resp) => {
-      if (resp.code === 0) {
+      if (resp.code === 200) {
         emits("changeStatus", false);
         window.$message.success("更新个人信息成功");
       }
