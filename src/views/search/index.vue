@@ -3,21 +3,15 @@
     <n-page-header @back="handleBack">
       <div>
         <n-h4 class="sortH4">
-          <a
-            v-bind:style="{
-              color: colorRef.time ? '#70a1ff' : undefined,
-            }"
-            @click="() => changeSort('time')"
-          >
+          <a v-bind:style="{
+            color: colorRef.time ? '#70a1ff' : undefined,
+          }" @click="() => changeSort('time')">
             时间排序
           </a>
           <n-divider vertical />
-          <a
-            v-bind:style="{
-              color: colorRef.read ? '#70a1ff' : undefined,
-            }"
-            @click="() => changeSort('read')"
-          >
+          <a v-bind:style="{
+            color: colorRef.read ? '#70a1ff' : undefined,
+          }" @click="() => changeSort('read')">
             阅读排序
           </a>
         </n-h4>
@@ -48,7 +42,7 @@
             </n-thing>
           </n-list-item>
         </n-list>
-        <n-empty size="large" description="你什么也没找到" v-else>
+        <n-empty size="large" description="什么也没找到" v-else>
           <template #extra>
             <n-button size="small" type="primary" @click="changeLookOther">看看别的文章</n-button>
           </template>
