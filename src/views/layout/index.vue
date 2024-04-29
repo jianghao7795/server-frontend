@@ -5,13 +5,19 @@
         <n-card :bordered="false" class="darkStyle" :header-style="headerStyle">
           <template #header-extra>
             <div class="headerStyleLine" ref="searchRef" :class="{ visible: visible, visibleNo: !visible }">
-              <NSpace>
+              <NSpace :inline="true" :size="0">
                 <div class="toopli">
-                  <NInput round ref="searchInputRef" v-model:value="searchInput" placeholder="搜索文章" type="text" @keyup.enter="submit">
-                    <template #suffix>
-                      <n-icon v-bind:style="{ lineHeight: 0.5 }" :component="Search" />
-                    </template>
+                  <n-icon :class="{ disSearch: isSearch }" :component="Search" @click="searchFouns" />
+                </div>
+                <div class="toopli">
+
+                  <NInput ref="searchInputRef" v-model:value="searchInput" class="search"
+                    :class="{ searchLine: isSearch }" placeholder="搜索文章" type="text" @keyup.enter="submit"
+                    :on-blur="sarchBlur">
+                    <template #prefix><n-icon :class="{ disSearch: !isSearch }" :component="Search" /></template>
                   </NInput>
+
+
                   <!-- <n-list v-show="isSearch">
                     <n-list-item>
                       <n-thing v-if="searchHistoryAfter.length !== 0">
@@ -22,16 +28,9 @@
                   </n-list> -->
                 </div>
                 <div class="toopli">
-                  <n-tabs
-                    type="bar"
-                    animated
-                    :value="viewPage"
-                    size="small"
-                    :bar-width="28"
-                    justify-content="space-evenly"
-                    :tab-style="{ margin: '0 5px', fontWeight: 'bold' }"
-                    :on-update:value="(e: string) => changePath(e)"
-                  >
+                  <n-tabs type="bar" animated :value="viewPage" size="small" :bar-width="28"
+                    justify-content="space-evenly" :tab-style="{ margin: '0 5px', fontWeight: 'bold' }"
+                    :on-update:value="(e: string) => changePath(e)">
                     <n-tab name="/" tab="首页"></n-tab>
                     <n-tab name="/articles" tab="文章"></n-tab>
                     <n-tab name="/tags" tab="标签"></n-tab>
@@ -39,7 +38,8 @@
                   </n-tabs>
                 </div>
                 <div>
-                  <n-switch v-model:value="darkTheme" v-bind:on-update:value="changeTheme" size="medium" :rail-style="railStyle">
+                  <n-switch v-model:value="darkTheme" v-bind:on-update:value="changeTheme" size="medium"
+                    :rail-style="railStyle">
                     <template #checked-icon>
                       <NIcon style="line-height: 0.7rem">
                         <moon theme="filled" size="26" fill="#333" :strokeWidth="3" />
@@ -58,7 +58,8 @@
           <template #header>
             <div class="headerStyleLine" :class="{ visible: visible, visibleNo: !visible }">
               <b v-if="isLogin" style="cursor: pointer">
-                <n-dropdown :options="options" placement="bottom-end" trigger="hover" :show-arrow="true" @select="userLogout">
+                <n-dropdown :options="options" placement="bottom-end" trigger="hover" :show-arrow="true"
+                  @select="userLogout">
                   <n-avatar round size="small" :src="headImage"></n-avatar>
                 </n-dropdown>
               </b>
@@ -98,7 +99,8 @@
           <n-carousel-item style="width: 30%" v-for="item in bgImage" :key="item.ID">
             <n-popconfirm positive-text="确认" negative-text="取消" :on-positive-click="() => changeImages(item)">
               <template #trigger>
-                <img :src="item.url.includes('http') ? item.url : `${Base_URL}/${item.url}`" :title="item.name" class="carousel-img" />
+                <img :src="item.url.includes('http') ? item.url : `${Base_URL}/${item.url}`" :title="item.name"
+                  class="carousel-img" />
               </template>
               确定更换背景图片？
             </n-popconfirm>
@@ -108,16 +110,8 @@
     </n-drawer>
     <n-drawer v-model:show="loginStatus" :width="502" placement="left">
       <n-drawer-content title="登录">
-        <n-form
-          ref="formRef"
-          :model="userInfo"
-          :rules="rules"
-          label-placement="left"
-          label-width="auto"
-          require-mark-placement="right-hanging"
-          size="large"
-          @keyup.enter.native="login"
-        >
+        <n-form ref="formRef" :model="userInfo" :rules="rules" label-placement="left" label-width="auto"
+          require-mark-placement="right-hanging" size="large" @keyup.enter.native="login">
           <n-form-item path="name">
             <n-input type="text" v-model:value="userInfo.name" placeholder="账号" />
           </n-form-item>
@@ -188,8 +182,7 @@ const Base_URL = import.meta.env.VITE_BASE_API as string;
 const headImage = computed(() => `${Base_URL}/${userStore.currentUser.user.headerImg}`);
 const colorSet = computed(
   () =>
-    `url(${
-      new URL(userStore.currentUser.user.head_img ? `${Base_URL}/${userStore.currentUser.user.head_img}` : "/home-bg.png", import.meta.url).href
+    `url(${new URL(userStore.currentUser.user.head_img ? `${Base_URL}/${userStore.currentUser.user.head_img}` : "/home-bg.png", import.meta.url).href
     })`,
 );
 
@@ -199,6 +192,8 @@ const router = useRouter();
 const searchInputRef = ref<HTMLInputElement>();
 const searchInput = ref<string>("");
 const loadingFlag = ref<boolean>(false);
+const isSearch = ref<boolean>(false);
+const isSearchFouns = ref<boolean>(false);
 // const isMouseOver = ref<boolean>(false);
 const viewPage = ref<string>(route.fullPath);
 // const colorSet = ref<string>(`url(${new URL("/home-bg.png", import.meta.url).href})`);
@@ -219,7 +214,15 @@ const formRef = ref<FormInst | null>(null);
 // 修改密码status
 const revisePassword = ref<boolean>(false);
 // const isSearch = ref<boolean>(false);
-
+const searchFouns = () => {
+  searchInputRef.value?.focus();
+  isSearch.value = !isSearch.value;
+}
+const sarchBlur = () => {
+  console.log("失去焦点");
+  searchInputRef.value?.blur();
+  isSearch.value = !isSearch.value;
+}
 // 是否登录
 const isLogin = computed(() => !!userStore.currentUser.user.ID);
 const userInfo = ref<{ name: string; password: string }>({
@@ -524,7 +527,7 @@ const submit = () => {
   max-height: 41px;
 }
 
-.headerStyleLine > b > span {
+.headerStyleLine>b>span {
   margin-top: 8px;
 }
 
@@ -540,7 +543,7 @@ const submit = () => {
   margin-bottom: 20px;
 }
 
-.darkStyle > div {
+.darkStyle>div {
   background-image: linear-gradient(rgba(75, 75, 75, 1), rgba(255, 255, 255, 0));
 }
 
@@ -552,21 +555,23 @@ const submit = () => {
   align-items: flex-end;
   justify-content: space-around;
 }
+
 .toopli {
   display: inline-block;
   margin: 0;
   padding: 0;
 }
 
-.toopli > ul {
+.toopli>ul {
   display: flex;
-  flex-direction: column;
-  list-style: none;
+  // flex-direction: column;
+  // list-style: none;
   // background-color: #fff;
   height: 0;
   margin: 0;
 }
-.toopli > ul > li {
+
+.toopli>ul>li {
   cursor: default;
   // background-color: aqua;
 }
@@ -579,19 +584,41 @@ const submit = () => {
 .sarch-history-detail:hover {
   background-color: #999;
 }
+
 .middle-view {
   min-height: calc(100% - 430px);
 }
+
 .visible {
   transition: transform 1s;
   transform: translate3d(0, -200%, 0);
 }
+
 .visibleNo {
   transition: transform 1s;
   transform: translate3d(0);
 }
+
 .blankText {
   min-height: 400px;
   max-height: 600px;
+}
+
+.search {
+  width: 0px;
+  margin-top: 5px;
+  transition-property: width;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
+  transition-delay: 0s;
+}
+
+.searchLine {
+  width: 200px;
+  display: block;
+}
+
+.disSearch {
+  display: none;
 }
 </style>
