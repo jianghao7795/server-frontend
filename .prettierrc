@@ -16,5 +16,5 @@
   "vueIndentScriptAndStyle": false,
   "endOfLine": "lf",
   "embeddedLanguageFormatting": "auto",
-  "printWidth": 150
+  "printWidth": 180
 }
