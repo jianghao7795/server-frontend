@@ -27,19 +27,12 @@
           </div>
           <div>日期：{{ changeDate(articleStore.detail?.CreatedAt) }}</div>
           <div>阅读量：{{ articleStore.detail?.reading_quantity }}</div>
-          <div>{{ articleStore.detail?.content }}</div>
+          <div>{{ articleStore.detail.desc }}</div>
         </NSpace>
 
         <n-divider />
-        <MdPreview
-          :model-value="articleStore.detail?.content"
-          :theme="theme ? 'dark' : 'light'"
-          :pageFullscreen="false"
-          :preview="true"
-          :readOnly="true"
-          :showCodeRowNumber="true"
-          previewOnly
-        ></MdPreview>
+        <MdPreview :model-value="articleStore.detail?.content" :theme="theme ? 'dark' : 'light'" :pageFullscreen="false"
+          :preview="true" :readOnly="true" :showCodeRowNumber="true" previewOnly />
       </div>
     </n-page-header>
   </div>
@@ -189,6 +182,7 @@ onMounted(() => {
 .img-txt {
   max-height: 34px;
   display: flex;
-  align-items: center; /*垂直居中*/
+  align-items: center;
+  /*垂直居中*/
 }
 </style>
