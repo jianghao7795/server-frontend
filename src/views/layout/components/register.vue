@@ -1,27 +1,12 @@
 <template>
   <n-drawer v-model:show="props.registerStatus" :width="502" placement="left" :on-update:show="(show: boolean) => emits('changeStatus', show)">
     <n-drawer-content title="注册" closable>
-      <n-form
-        ref="formRef"
-        :model="userRegister"
-        :rules="rules"
-        label-placement="left"
-        label-width="auto"
-        require-mark-placement="right-hanging"
-        size="large"
-      >
+      <n-form ref="formRef" :model="userRegister" :rules="rules" label-placement="left" label-width="auto" require-mark-placement="right-hanging" size="large">
         <n-form-item path="name">
           <n-input type="text" v-model:value="userRegister.name" :clearable="true" placeholder="账号" />
         </n-form-item>
         <n-form-item path="password">
-          <n-input
-            :clearable="true"
-            type="password"
-            :minlength="6"
-            show-password-on="click"
-            v-model:value="userRegister.password"
-            placeholder="密码"
-          />
+          <n-input :clearable="true" type="password" :minlength="6" show-password-on="click" v-model:value="userRegister.password" placeholder="密码" />
         </n-form-item>
         <n-form-item path="re_password">
           <n-input type="password" :clearable="true" show-password-on="click" v-model:value="userRegister.re_password" placeholder="重复密码" />
