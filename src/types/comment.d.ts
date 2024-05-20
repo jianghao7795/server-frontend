@@ -10,6 +10,8 @@ declare namespace Comment {
     user_id: number;
     user_name: string;
     user: User.UserInfo;
+    to_user: User.UserInfo;
+    to_user_id: number;
     children: comment[];
   }
 }

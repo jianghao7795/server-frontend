@@ -35,17 +35,33 @@
           :preview="true" :readOnly="true" :showCodeRowNumber="true" previewOnly />
       </div>
     </n-page-header>
+    <div class="view-margin">
+      <h1>评论</h1>
+      <h3><n-input placeholder="规则表达" size="small" style="width: 100%" /></h3>
+      <div>
+        <n-collapse arrow-placement="right">
+          <n-collapse-item v-for="item in comment" :name="item.ID" :key="item.ID">
+            <template class="img-txt" #header>
+              <div>
+                <span>{{ item.user.nickName }}: </span>
+                <span>{{ item.content }}</span>
+              </div>
+            </template>
+            <div>
+              <div v-for="child in item.children" :key="child.ID">
+                <span>{{ child.user.nickName }} 回复 {{ child.to_user.nickName }}: </span>
+                {{ child.content }}
+              </div>
+            </div>
+          </n-collapse-item>
+        </n-collapse>
+      </div>
+    </div>
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "ArticleDetail",
-};
-</script>
-
-<script lang="ts" setup>
-import { onMounted, inject, type Ref, computed } from "vue";
+<script lang="ts" setup name="ArticleDetail">
+import { onMounted, inject, ref, type Ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { colorIndex } from "@/common/article";
 import dayjs from "dayjs";
@@ -53,11 +69,9 @@ import { MdPreview } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import { useArticleStore } from "@/stores/article";
 import type { GlobalTheme } from "naive-ui";
+import { getArticleComment, createdComment } from "@/services/comment";
 
 const Base_URL = import.meta.env.VITE_BASE_API + "/";
-// const inputSelectRef = ref<any>(null);
-// const message = useMessage();
-// const userStroe = useUserStore();
 const route = useRoute();
 const router = useRouter();
 const theme = inject<Ref<GlobalTheme | null>>("theme");
@@ -66,7 +80,7 @@ const avatar = computed(() => (articleStore.detail?.user?.headerImg ? Base_URL +
 // const isComment = ref<boolean>(false);
 // const isCommentChildren = ref<{ [id: number]: boolean }>({});
 
-// const comment = ref<Comment.comment[]>([]);
+const comment = ref<Comment.comment[]>([]);
 // const inputRef = ref<string>("");
 // const inputChildren = ref<string>("");
 // const changeLogin = inject<(status: boolean) => void>("changeLogin");
@@ -168,13 +182,11 @@ const changeDate = (timeData?: string): string => {
 //   // console.log(options);
 // };
 
-onMounted(() => {
+onMounted(async () => {
   const params = route.params;
   articleStore.getDetail({ id: params.id as string });
-  // const resp = await getArticleComment({ articleId: params.id as string });
-  // comment.value = resp.data;
-  // console.log(route.params, params);
-  //   console.log(resp);
+  const resp = await getArticleComment({ articleId: params.id as string });
+  comment.value = resp.data;
 });
 </script>
 
