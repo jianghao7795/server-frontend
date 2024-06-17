@@ -66,7 +66,7 @@ export const useArticleStore = defineStore("article", {
 
     async getDetail(payload: { id: string }) {
       const resp = await getArticleDetail(payload.id);
-      this.detail = resp.data.article;
+      this.detail = resp.data;
     },
   },
 });
