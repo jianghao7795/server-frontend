@@ -1,8 +1,8 @@
 dev:
 	pnpm run dev
 build-docker:
-	pnpm run build-pnponly
-build:
 	pnpm run build
+build:
+	pnpm run build-only
 run:
 	pnpm run dev
