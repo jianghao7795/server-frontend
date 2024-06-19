@@ -37,21 +37,6 @@
                     <n-tab name="/about" tab="关于"></n-tab>
                   </n-tabs>
                 </div>
-                <div>
-                  <n-switch v-model:value="darkTheme" v-bind:on-update:value="changeTheme" size="medium"
-                    :rail-style="railStyle">
-                    <template #checked-icon>
-                      <NIcon style="line-height: 0.7rem">
-                        <moon theme="filled" size="26" fill="#333" :strokeWidth="3" />
-                      </NIcon>
-                    </template>
-                    <template #unchecked-icon>
-                      <NIcon style="line-height: 0.7rem">
-                        <sun-one theme="outline" size="26" fill="#333" :strokeWidth="3" />
-                      </NIcon>
-                    </template>
-                  </n-switch>
-                </div>
               </NSpace>
             </div>
           </template>
