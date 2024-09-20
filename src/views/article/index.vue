@@ -42,7 +42,7 @@
 
 <script lang="ts" setup name="Article">
 // import { NList, NThing, NListItem, NSpace, NTag, NButton } from "naive-ui";
-import { onMounted, computed, h } from "vue";
+import { onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import { colorIndex } from "@/common/article";
 import { useArticleStore } from "@/stores/article";

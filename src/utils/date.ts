@@ -1,36 +1,36 @@
 import dayjs from "dayjs";
-const format = (times: string, fmt: string) => {
-  const currentDate = new Date(times);
-  const o: { [t: string]: number } = {
-    "M+": currentDate.getMonth() + 1, // 月份
-    "d+": currentDate.getDate(), // 日
-    "h+": currentDate.getHours(), // 小时
-    "m+": currentDate.getMinutes(), // 分
-    "s+": currentDate.getSeconds(), // 秒
-    "q+": Math.floor((currentDate.getMonth() + 3) / 3), // 季度
-    S: currentDate.getMilliseconds(), // 毫秒
-  };
-  if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, (currentDate.getFullYear() + "").substring(4 - RegExp.$1.length));
-  }
-  for (var k in o) {
-    if (new RegExp("(" + k + ")").test(fmt)) {
-      fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? o[k].toString() : ("00" + o[k]).substring(("" + o[k]).length));
-    }
-  }
-  return fmt;
-};
+// const format = (times: string, fmt: string) => {
+//   const currentDate = new Date(times);
+//   const o: { [t: string]: number } = {
+//     "M+": currentDate.getMonth() + 1, // 月份
+//     "d+": currentDate.getDate(), // 日
+//     "h+": currentDate.getHours(), // 小时
+//     "m+": currentDate.getMinutes(), // 分
+//     "s+": currentDate.getSeconds(), // 秒
+//     "q+": Math.floor((currentDate.getMonth() + 3) / 3), // 季度
+//     S: currentDate.getMilliseconds(), // 毫秒
+//   };
+//   if (/(y+)/.test(fmt)) {
+//     fmt = fmt.replace(RegExp.$1, (currentDate.getFullYear() + "").substring(4 - RegExp.$1.length));
+//   }
+//   for (var k in o) {
+//     if (new RegExp("(" + k + ")").test(fmt)) {
+//       fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? o[k].toString() : ("00" + o[k]).substring(("" + o[k]).length));
+//     }
+//   }
+//   return fmt;
+// };
 
-export function formatTimeToStr(times: string, pattern?: string) {
-  let d: string = "";
-  if (pattern) {
-    d = format(times, pattern);
-  } else {
-    d = format(times, "yyyy-MM-dd hh:mm:ss");
-  }
+// export function formatTimeToStr(times: string, pattern?: string) {
+//   let d: string = "";
+//   if (pattern) {
+//     d = format(times, pattern);
+//   } else {
+//     d = format(times, "yyyy-MM-dd hh:mm:ss");
+//   }
 
-  return d.toLocaleString();
-}
+//   return d.toLocaleString();
+// }
 
 export function calculationTime(times?: string): string {
   const days = dayjs(times);
