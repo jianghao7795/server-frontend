@@ -10,13 +10,18 @@
                   <n-icon :class="{ disSearch: isSearch }" :component="Search" @click="searchFouns" />
                 </div>
                 <div class="toopli">
-
-                  <NInput ref="searchInputRef" v-model:value="searchInput" class="search"
-                    :class="{ searchLine: isSearch }" placeholder="搜索文章" type="text" @keyup.enter="submit"
-                    :on-blur="sarchBlur">
+                  <NInput
+                    ref="searchInputRef"
+                    v-model:value="searchInput"
+                    class="search"
+                    :class="{ searchLine: isSearch }"
+                    placeholder="搜索文章"
+                    type="text"
+                    @keyup.enter="submit"
+                    :on-blur="sarchBlur"
+                  >
                     <template #prefix><n-icon :class="{ disSearch: !isSearch }" :component="Search" /></template>
                   </NInput>
-
 
                   <!-- <n-list v-show="isSearch">
                     <n-list-item>
@@ -28,9 +33,16 @@
                   </n-list> -->
                 </div>
                 <div class="toopli">
-                  <n-tabs type="bar" animated :value="viewPage" size="small" :bar-width="28"
-                    justify-content="space-evenly" :tab-style="{ margin: '0 5px', fontWeight: 'bold' }"
-                    :on-update:value="(e: string) => changePath(e)">
+                  <n-tabs
+                    type="bar"
+                    animated
+                    :value="viewPage"
+                    size="small"
+                    :bar-width="28"
+                    justify-content="space-evenly"
+                    :tab-style="{ margin: '0 5px', fontWeight: 'bold' }"
+                    :on-update:value="(e: string) => changePath(e)"
+                  >
                     <n-tab name="/" tab="首页"></n-tab>
                     <n-tab name="/articles" tab="文章"></n-tab>
                     <n-tab name="/tags" tab="标签"></n-tab>
@@ -43,8 +55,7 @@
           <template #header>
             <div class="headerStyleLine" :class="{ visible: visible, visibleNo: !visible }">
               <b v-if="isLogin" style="cursor: pointer">
-                <n-dropdown :options="options" placement="bottom-end" trigger="hover" :show-arrow="true"
-                  @select="userLogout">
+                <n-dropdown :options="options" placement="bottom-end" trigger="hover" :show-arrow="true" @select="userLogout">
                   <n-avatar round size="small" :src="headImage"></n-avatar>
                 </n-dropdown>
               </b>
@@ -84,8 +95,7 @@
           <n-carousel-item style="width: 30%" v-for="item in bgImage" :key="item.ID">
             <n-popconfirm positive-text="确认" negative-text="取消" :on-positive-click="() => changeImages(item)">
               <template #trigger>
-                <img :src="item.url.includes('http') ? item.url : `${Base_URL}/${item.url}`" :title="item.name"
-                  class="carousel-img" />
+                <img :src="item.url.includes('http') ? item.url : `${Base_URL}/${item.url}`" :title="item.name" class="carousel-img" />
               </template>
               确定更换背景图片？
             </n-popconfirm>
@@ -95,8 +105,16 @@
     </n-drawer>
     <n-drawer v-model:show="loginStatus" :width="502" placement="left">
       <n-drawer-content title="登录">
-        <n-form ref="formRef" :model="userInfo" :rules="rules" label-placement="left" label-width="auto"
-          require-mark-placement="right-hanging" size="large" @keyup.enter.native="login">
+        <n-form
+          ref="formRef"
+          :model="userInfo"
+          :rules="rules"
+          label-placement="left"
+          label-width="auto"
+          require-mark-placement="right-hanging"
+          size="large"
+          @keyup.enter.native="login"
+        >
           <n-form-item path="name">
             <n-input type="text" v-model:value="userInfo.name" placeholder="账号" />
           </n-form-item>
@@ -139,7 +157,7 @@ const headerStyle = `
   left: 0;
   top: 0;
   width: 100%;
-  padding-top: 10px;  
+  padding-top: 10px;
 `;
 
 const visible = ref<boolean>(false);
@@ -166,9 +184,7 @@ const changeScroll = (e: Event) => {
 const Base_URL = import.meta.env.VITE_BASE_API as string;
 const headImage = computed(() => `${Base_URL}/${userStore.currentUser.user.headerImg}`);
 const colorSet = computed(
-  () =>
-    `url(${new URL(userStore.currentUser.user.head_img ? `${Base_URL}/${userStore.currentUser.user.head_img}` : "/home-bg.png", import.meta.url).href
-    })`,
+  () => `url(${new URL(userStore.currentUser.user.head_img ? `${Base_URL}/${userStore.currentUser.user.head_img}` : "/home-bg.png", import.meta.url).href})`,
 );
 
 const userStore = useUserStore();
@@ -202,12 +218,12 @@ const revisePassword = ref<boolean>(false);
 const searchFouns = () => {
   searchInputRef.value?.focus();
   isSearch.value = !isSearch.value;
-}
+};
 const sarchBlur = () => {
   console.log("失去焦点");
   searchInputRef.value?.blur();
   isSearch.value = !isSearch.value;
-}
+};
 // 是否登录
 const isLogin = computed(() => !!userStore.currentUser.user.ID);
 const userInfo = ref<{ name: string; password: string }>({
@@ -499,10 +515,10 @@ const submit = () => {
 };
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .carousel-img {
   width: 100%;
-  // height: 240px;
+  /* // height: 240px; */
   object-fit: cover;
 }
 
@@ -512,12 +528,12 @@ const submit = () => {
   max-height: 41px;
 }
 
-.headerStyleLine>b>span {
+.headerStyleLine > b > span {
   margin-top: 8px;
 }
 
 .darkStyle {
-  background-color: coral;
+  background-color: #000;
   background-image: v-bind(colorSet);
   background-position: center;
   height: auto;
@@ -528,7 +544,7 @@ const submit = () => {
   margin-bottom: 20px;
 }
 
-.darkStyle>div {
+.darkStyle > div {
   background-image: linear-gradient(rgba(75, 75, 75, 1), rgba(255, 255, 255, 0));
 }
 
@@ -547,23 +563,18 @@ const submit = () => {
   padding: 0;
 }
 
-.toopli>ul {
+.toopli > ul {
   display: flex;
-  // flex-direction: column;
-  // list-style: none;
-  // background-color: #fff;
   height: 0;
   margin: 0;
 }
 
-.toopli>ul>li {
-  cursor: default;
-  // background-color: aqua;
+.toopli > ul > li {
+  /* cursor: default; */
 }
 
 .sarch-history-detail {
   width: 100%;
-  // background-color: #999;
 }
 
 .sarch-history-detail:hover {

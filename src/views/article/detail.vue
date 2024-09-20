@@ -31,8 +31,15 @@
         </NSpace>
 
         <n-divider />
-        <MdPreview :model-value="articleStore.detail?.content" :theme="theme ? 'dark' : 'light'" :pageFullscreen="false"
-          :preview="true" :readOnly="true" :showCodeRowNumber="true" previewOnly />
+        <MdPreview
+          :model-value="articleStore.detail?.content"
+          :theme="theme ? 'dark' : 'light'"
+          :pageFullscreen="false"
+          :preview="true"
+          :readOnly="true"
+          :showCodeRowNumber="true"
+          previewOnly
+        />
       </div>
     </n-page-header>
     <div class="view-margin">
@@ -43,13 +50,13 @@
           <n-collapse-item v-for="item in comment" :name="item.ID" :key="item.ID">
             <template class="img-txt" #header>
               <div>
-                <span>{{ item.user.nickName }}: </span>
+                <span>{{ item.user.nickName }}:</span>
                 <span>{{ item.content }}</span>
               </div>
             </template>
             <div>
               <div v-for="child in item.children" :key="child.ID">
-                <span>{{ child.user.nickName }} 回复 {{ child.to_user.nickName }}: </span>
+                <span>{{ child.user.nickName }} 回复 {{ child.to_user.nickName }}:</span>
                 {{ child.content }}
               </div>
             </div>
@@ -190,7 +197,7 @@ onMounted(async () => {
 });
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .img-txt {
   max-height: 34px;
   display: flex;
