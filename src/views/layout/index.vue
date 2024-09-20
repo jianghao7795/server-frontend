@@ -569,17 +569,16 @@ const submit = () => {
   margin: 0;
 }
 
-.toopli > ul > li {
-  /* cursor: default; */
-}
+/* .toopli > ul > li { */
+/*   /* cursor: default; */
 
-.sarch-history-detail {
-  width: 100%;
-}
+/* .sarch-history-detail { */
+/*   width: 100%; */
+/* } */
 
-.sarch-history-detail:hover {
-  background-color: #999;
-}
+/* .sarch-history-detail:hover { */
+/*   background-color: #999; */
+/* } */
 
 .middle-view {
   min-height: calc(100% - 430px);
