@@ -76,7 +76,7 @@ import { MdPreview } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import { useArticleStore } from "@/stores/article";
 import type { GlobalTheme } from "naive-ui";
-import { getArticleComment, createdComment } from "@/services/comment";
+import { getArticleComment } from "@/services/comment";
 
 const Base_URL = import.meta.env.VITE_BASE_API + "/";
 const route = useRoute();

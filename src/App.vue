@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script lang="ts" setup name="App">
 import { defineComponent, h, provide, ref } from "vue";
 import { RouterView } from "vue-router";
 import type { GlobalTheme } from "naive-ui";
