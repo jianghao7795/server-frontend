@@ -44,7 +44,15 @@
     </n-page-header>
     <div class="view-margin">
       <h1>评论</h1>
-      <h3><n-input placeholder="规则表达" size="small" style="width: 100%" /></h3>
+      <h3>
+        <n-input
+          placeholder="规则表达"
+          @keydown.enter="submit"
+          size="small"
+          style="width: 100%"
+          v-model:value="commentString"
+        />
+      </h3>
       <div>
         <n-collapse arrow-placement="right">
           <n-collapse-item v-for="item in comment" :name="item.ID" :key="item.ID">
@@ -69,6 +77,7 @@
 
 <script lang="ts" setup name="ArticleDetail">
 import { onMounted, inject, ref, type Ref, computed } from "vue";
+// import type { KeyboardEvent } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { colorIndex } from "@/common/article";
 import dayjs from "dayjs";
@@ -76,18 +85,40 @@ import { MdPreview } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import { useArticleStore } from "@/stores/article";
 import type { GlobalTheme } from "naive-ui";
-import { getArticleComment } from "@/services/comment";
+import { NInput } from "naive-ui";
+import { getArticleComment, createdComment } from "@/services/comment";
 
 const Base_URL = import.meta.env.VITE_BASE_API + "/";
 const route = useRoute();
 const router = useRouter();
 const theme = inject<Ref<GlobalTheme | null>>("theme");
 const articleStore = useArticleStore();
-const avatar = computed(() => (articleStore.detail?.user?.headerImg ? Base_URL + articleStore.detail?.user?.headerImg : ""));
+const avatar = computed(() =>
+  articleStore.detail?.user?.headerImg ? Base_URL + articleStore.detail?.user?.headerImg : "",
+);
 // const isComment = ref<boolean>(false);
 // const isCommentChildren = ref<{ [id: number]: boolean }>({});
-
+const commentString = ref<string>("");
 const comment = ref<Comment.comment[]>([]);
+
+const submit = async () => {
+  const resp = await createdComment({
+    article_id: articleStore.detail.ID,
+    parent_id: 0,
+    content: commentString.value,
+    user_id: articleStore.detail.user_id,
+    to_user_id: 0,
+  } as Comment.comment);
+
+  if (resp?.code === 200) {
+    window.$message.success("评论成功");
+    // comment.value = [];
+    const params = route.params;
+    const respComment = await getArticleComment({ articleId: params.id as string });
+    comment.value = respComment.data;
+    commentString.value = "";
+  }
+};
 // const inputRef = ref<string>("");
 // const inputChildren = ref<string>("");
 // const changeLogin = inject<(status: boolean) => void>("changeLogin");

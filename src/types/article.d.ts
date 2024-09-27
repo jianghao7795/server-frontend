@@ -19,9 +19,10 @@ declare namespace API {
     headerImg: string;
   };
 
-  export type initArticle = Partial<Omit<Article, "ID" | "UpdatedAt">>;
+  export type initArticle = Partial<Omit<Article, "UpdatedAt">>;
 
-  export type CreateArticleUser = Omit<ArticleUser, "userName" | "nickName" | "headerImg"> & Pick<ArticleUser, "userName" | "nickName" | "headerImg">;
+  export type CreateArticleUser = Omit<ArticleUser, "userName" | "nickName" | "headerImg"> &
+    Pick<ArticleUser, "userName" | "nickName" | "headerImg">;
 
   export interface User {
     ID: number;

@@ -8,7 +8,6 @@ declare namespace Comment {
     parentId: number;
     content: string;
     user_id: number;
-    user_name: string;
     user: User.UserInfo;
     to_user: User.UserInfo;
     to_user_id: number;
