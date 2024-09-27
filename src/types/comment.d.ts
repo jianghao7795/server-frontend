@@ -3,7 +3,7 @@ declare namespace Comment {
     ID: number;
     createdAt: string;
     updatedAt: string;
-    articleId: number;
+    article_id: number;
     article: API.Article;
     parentId: number;
     content: string;
@@ -13,4 +13,11 @@ declare namespace Comment {
     to_user_id: number;
     children: comment[];
   }
+  export type createcomment = {
+    article_id: number;
+    parent_id: number;
+    content: string;
+    user_id: number;
+    to_user_id: number;
+  };
 }

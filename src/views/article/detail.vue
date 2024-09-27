@@ -108,7 +108,7 @@ const submit = async () => {
     content: commentString.value,
     user_id: articleStore.detail.user_id,
     to_user_id: 0,
-  } as Comment.comment);
+  });
 
   if (resp?.code === 200) {
     window.$message.success("评论成功");
