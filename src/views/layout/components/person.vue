@@ -7,7 +7,14 @@
         </div>
       </template>
 
-      <n-form ref="formRef" :model="userInfo" :rules="rules" label-placement="left" label-width="auto" require-mark-placement="right-hanging">
+      <n-form
+        ref="formRef"
+        :model="userInfo"
+        :rules="rules"
+        label-placement="left"
+        label-width="auto"
+        require-mark-placement="right-hanging"
+      >
         <n-form-item label="头像" path="header">
           <n-upload
             accept=".png,.jpg,.jpeg,.git"
@@ -59,20 +66,20 @@ const fileList = ref<UploadFileInfo[]>([
     id: "a",
     name: "头像.png",
     status: "finished",
-    url: Base_URL + userStore.currentUser.user.headerImg,
+    url: Base_URL + userStore.currentUser.user?.headerImg,
   },
 ]);
 
 watch(
   () => userStore.currentUser.user,
   () => {
-    userInfo.value = userStore.currentUser.user;
+    userInfo.value = userStore.currentUser?.user;
     fileList.value = [
       {
         id: "a",
         name: "头像.png",
         status: "finished",
-        url: Base_URL + userStore.currentUser.user.headerImg,
+        url: Base_URL + userStore.currentUser?.user?.headerImg,
       },
     ];
   },

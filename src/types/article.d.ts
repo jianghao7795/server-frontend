@@ -11,6 +11,7 @@ declare namespace API {
     title: string;
     user_id: number;
     reading_quantity: number;
+    is_important: 1 | 0;
   };
 
   export type ArticleUser = {

@@ -60,7 +60,7 @@
 
 <script setup lang="ts" name="Home">
 // import { NList, NThing, NListItem, NSpace, NTag, NButton, NEmpty } from "naive-ui";
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted } from "vue";
 import { getArticleList } from "@/services/article";
 import { PreviewOpen, StopwatchStart, UserBusiness } from "@icon-park/vue-next";
 import { useRouter } from "vue-router";

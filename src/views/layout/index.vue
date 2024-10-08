@@ -55,7 +55,13 @@
           <template #header>
             <div class="headerStyleLine" :class="{ visible: visible, visibleNo: !visible }">
               <b v-if="isLogin" style="cursor: pointer">
-                <n-dropdown :options="options" placement="bottom-end" trigger="hover" :show-arrow="true" @select="userLogout">
+                <n-dropdown
+                  :options="options"
+                  placement="bottom-end"
+                  trigger="hover"
+                  :show-arrow="true"
+                  @select="userLogout"
+                >
                   <n-avatar round size="small" :src="headImage"></n-avatar>
                 </n-dropdown>
               </b>
@@ -95,7 +101,11 @@
           <n-carousel-item style="width: 30%" v-for="item in bgImage" :key="item.ID">
             <n-popconfirm positive-text="确认" negative-text="取消" :on-positive-click="() => changeImages(item)">
               <template #trigger>
-                <img :src="item.url.includes('http') ? item.url : `${Base_URL}/${item.url}`" :title="item.name" class="carousel-img" />
+                <img
+                  :src="item.url.includes('http') ? item.url : `${Base_URL}/${item.url}`"
+                  :title="item.name"
+                  class="carousel-img"
+                />
               </template>
               确定更换背景图片？
             </n-popconfirm>
@@ -134,9 +144,9 @@
 </template>
 
 <script setup lang="ts" name="Layout">
-import { KeepAlive, Transition, onMounted, ref, watch, inject, provide, computed, h } from "vue";
-import type { CSSProperties, Ref } from "vue";
-import type { GlobalTheme, FormInst } from "naive-ui";
+import { onMounted, ref, watch, provide, computed, h } from "vue";
+import type { CSSProperties } from "vue";
+import type { FormInst } from "naive-ui";
 import { NIcon } from "naive-ui";
 import { RouterView, useRouter, useRoute } from "vue-router";
 import { Search, Logout, Change, Moon, SunOne, SettingTwo, Lock } from "@icon-park/vue-next";
@@ -182,9 +192,10 @@ const changeScroll = (e: Event) => {
 };
 
 const Base_URL = import.meta.env.VITE_BASE_API as string;
-const headImage = computed(() => `${Base_URL}/${userStore.currentUser.user.headerImg}`);
+const headImage = computed(() => `${Base_URL}/${userStore.currentUser?.user?.headerImg}`);
 const colorSet = computed(
-  () => `url(${new URL(userStore.currentUser.user.head_img ? `${Base_URL}/${userStore.currentUser.user.head_img}` : "/home-bg.png", import.meta.url).href})`,
+  () =>
+    `url(${new URL(userStore.currentUser?.user?.head_img ? `${Base_URL}/${userStore.currentUser.user.head_img}` : "/home-bg.png", import.meta.url).href})`,
 );
 
 const userStore = useUserStore();
@@ -194,7 +205,7 @@ const searchInputRef = ref<HTMLInputElement>();
 const searchInput = ref<string>("");
 const loadingFlag = ref<boolean>(false);
 const isSearch = ref<boolean>(false);
-const isSearchFouns = ref<boolean>(false);
+// const isSearchFouns = ref<boolean>(false);
 // const isMouseOver = ref<boolean>(false);
 const viewPage = ref<string>(route.fullPath);
 // const colorSet = ref<string>(`url(${new URL("/home-bg.png", import.meta.url).href})`);
@@ -208,8 +219,8 @@ const loginStatus = ref<boolean>(false);
 
 const personalInformationStatus = ref<boolean>(false);
 // 主题状态
-const theme = inject<Ref<GlobalTheme | null>>("theme");
-const darkTheme = computed(() => !(theme?.value === null));
+// const theme = inject<Ref<GlobalTheme | null>>("theme");
+// const darkTheme = computed(() => !(theme?.value === null));
 //form Ref
 const formRef = ref<FormInst | null>(null);
 // 修改密码status
@@ -225,7 +236,7 @@ const sarchBlur = () => {
   isSearch.value = !isSearch.value;
 };
 // 是否登录
-const isLogin = computed(() => !!userStore.currentUser.user.ID);
+const isLogin = computed(() => !!userStore.currentUser?.user?.ID);
 const userInfo = ref<{ name: string; password: string }>({
   name: "admin_user",
   password: "123456",
@@ -386,7 +397,9 @@ const changeImages = async (data: User.Images) => {
   });
   window.$message.success("更换成功");
   active.value = false;
-  userStore.updateUserInfo({ ...userStore.currentUser.user, head_img: data.url });
+  if (userStore.currentUser?.user) {
+    userStore.updateUserInfo({ ...userStore.currentUser.user, head_img: data.url });
+  }
   // colorSet.value = `url(${new URL(data.url.includes("http") ? data.url : `${Base_URL}/${data.url}`, import.meta.url).href})`;
 };
 
