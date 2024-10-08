@@ -1,6 +1,6 @@
 <template>
   <div class="view-content">
-    <div v-if="userStore.currentUser?.user?.ID !== 0">
+    <div v-if="userStore.currentUser?.user?.ID">
       <h4>介绍: {{ userStore.currentUser?.user?.nickName }}</h4>
       <div class="about-content">
         <Content :imgUrl="userStore.currentUser?.user?.introduction" />
