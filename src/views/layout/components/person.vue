@@ -96,7 +96,7 @@ const changeCustomRequest = (options: UploadCustomRequestOptions) => {
         userStore.currentUser.user.headerImg = resp.data?.file.url as string;
       }
     })
-    .catch((e) => {
+    .catch(() => {
       window.$message.error("上传失败");
     });
 };
