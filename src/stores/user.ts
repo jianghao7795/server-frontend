@@ -7,27 +7,7 @@ export const useUserStore = defineStore("user", {
     loading: boolean;
     loadingRegister: boolean;
   } => ({
-    currentUser: {
-      user: {
-        ID: 0,
-        CreatedAt: "",
-        UpdatedAt: "",
-        uuid: "",
-        userName: "",
-        nickName: "",
-        sideMode: "",
-        headerImg: "",
-        baseColor: "",
-        activeColor: "",
-        phone: "",
-        email: "",
-        head_img: "",
-        introduction: "",
-        content: "",
-      },
-      token: "",
-      exportAt: 0,
-    },
+    currentUser: <User.CurrentUser>{},
     loading: false,
     loadingRegister: false,
   }),
