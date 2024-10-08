@@ -19,10 +19,20 @@ declare namespace API {
     headerImg: string;
   };
 
-  export type initArticle = Partial<Omit<Article, "UpdatedAt">>;
+  // export type initArticle = Partial<Article>;
 
   export type CreateArticleUser = Omit<ArticleUser, "userName" | "nickName" | "headerImg"> &
-    Pick<ArticleUser, "userName" | "nickName" | "headerImg">;
+    Pick<ArticleUser, "userName" | "nickName" | "headerImg">; // 采集
+
+  export type SearchArticle = Partial<Article> & {
+    page?: number;
+    pageSize?: number;
+    name?: string;
+    value?: string;
+    sort?: string;
+  }; // Partial 类型可选
+  export type CreateArticle = Omit<Article, "UpdatedAt" | "CreatedAt" | "ID" | "user">; // Omit 舍去属性
+  export type UpdateArticle = Omit<Article, "UpdatedAt" | "CreatedAt" | "user">; //
 
   export interface User {
     ID: number;
@@ -49,15 +59,15 @@ declare namespace API {
     aritcles?: Article[];
   };
 
-  export type SearchArticle = {
-    page?: number;
-    pageSize?: number;
-    title?: string;
-    is_important?: number;
-    name?: "tag" | "article";
-    value?: string;
-    sort?: string;
-  };
+  // export type SearchArticle = {
+  //   page?: number;
+  //   pageSize?: number;
+  //   title?: string;
+  //   is_important?: number;
+  //   name?: "tag" | "article";
+  //   value?: string;
+  //   sort?: string;
+  // };
 
   export type SearchTag = {
     name?: string;

@@ -33,7 +33,7 @@ export const useArticleStore = defineStore("article", {
   state: (): {
     page: number;
     list: API.Article[];
-    detail: API.initArticle;
+    detail: API.Article;
     total: number;
     showMore: boolean;
     loading: boolean;
@@ -41,7 +41,7 @@ export const useArticleStore = defineStore("article", {
     return {
       page: 1,
       list: [],
-      detail: {},
+      detail: <API.Article>{},
       total: 0,
       showMore: true,
       loading: false,
