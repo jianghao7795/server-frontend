@@ -109,6 +109,7 @@ const submit = async () => {
     user_id: articleStore.detail.user_id,
     to_user_id: 0,
   });
+  // console.log(resp);
 
   if (resp?.code === 200) {
     window.$message.success("评论成功");
