@@ -13,7 +13,7 @@ dist
 dist-ssr
 coverage
 *.local
-
+conf/config.conf
 /cypress/videos/
 /cypress/screenshots/
 
