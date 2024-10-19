@@ -75,12 +75,6 @@
   </div>
 </template>
 
-<script lang="ts">
-export default defineComponent({
-  namespace: "ArticleDetail",
-});
-</script>
-
 <script lang="ts" setup name="ArticleDetail">
 import { onMounted, inject, ref, type Ref, computed } from "vue";
 // import type { KeyboardEvent } from "vue";
@@ -115,6 +109,7 @@ const submit = async () => {
     user_id: articleStore.detail.user_id,
     to_user_id: 0,
   });
+  // console.log(resp);
 
   if (resp?.code === 200) {
     window.$message.success("评论成功");

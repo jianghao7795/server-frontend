@@ -83,7 +83,7 @@ service.interceptors.response.use(
       duration: 10000,
       keepAliveOnHover: true,
     });
-    return;
+    return { code: status, message };
   },
 );
 

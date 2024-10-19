@@ -12,8 +12,8 @@ RUN pnpm run build
 
 
 # multi-stage builds
-FROM nginx:latest
+FROM nginx:stable
 LABEL org.opencontainers.image.authors="jianghao"
 RUN rm -rf /usr/share/nginx/html/* && mkdir -p /usr/share/nginx/html/frontend
 COPY --from=builder /app/dist /usr/share/nginx/html/frontend
-COPY ./conf/config.conf /etc/nginx/conf.d/default.conf
+COPY ./conf/my.conf /etc/nginx/conf.d/default.conf
