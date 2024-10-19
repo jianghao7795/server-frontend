@@ -80,9 +80,9 @@
         <NSpin :show="loadingFlag">
           <RouterView v-slot="{ Component, route }">
             <transition mode="out-in" name="fade-in-linear" type="transition" :appear="true">
-              <keep-alive v-bind:exclude="['ArticleDetail', 'Article']">
-                <component :is="Component" :key="route.name" />
-              </keep-alive>
+              <!-- <keep-alive v-bind:exclude="['ArticleDetail', 'Article']"> -->
+              <component :is="Component" :key="route.name" />
+              <!-- </keep-alive> -->
             </transition>
           </RouterView>
         </NSpin>
@@ -149,7 +149,7 @@ import type { CSSProperties } from "vue";
 import type { FormInst } from "naive-ui";
 import { NIcon } from "naive-ui";
 import { RouterView, useRouter, useRoute } from "vue-router";
-import { Search, Logout, Change, Moon, SunOne, SettingTwo, Lock } from "@icon-park/vue-next";
+import { Search, Logout, Change, SettingTwo, Lock } from "@icon-park/vue-next";
 import dayjs from "dayjs";
 import { emitter } from "@/utils/common";
 import { getImages } from "@/services/image";
