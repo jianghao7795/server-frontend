@@ -6,3 +6,5 @@ build:
 	pnpm run build-only
 run:
 	pnpm run dev
+deloy:
+  bash deloy.sh
