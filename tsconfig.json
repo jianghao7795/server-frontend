@@ -1,6 +1,6 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["src/**/*", "src/**/*.vue", "src/types/**/*", "*.vue"],
+  "include": ["./src/**/*", "./src/**/*.vue", "./src/types/**/*"],
   "compilerOptions": {
     "ignoreDeprecations": "5.0",
     "baseUrl": ".",
@@ -8,13 +8,21 @@
       "@/*": ["./src/*"]
     },
     "types": ["naive-ui/volar", "vite/client"],
-    "lib": ["esnext", "dom"],
-    "target": "ESNext",
     "module": "ESNext",
+    "target": "ESNext",
     "strict": false,
+    "esModuleInterop": true,
     "jsx": "preserve",
-    "moduleResolution": "node"
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "strictNullChecks": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true
   },
+  "exclude": ["**/node_modules/**", "**/dist/**"],
   "references": [
     {
       "path": "./tsconfig.config.json"
