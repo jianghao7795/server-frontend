@@ -8,6 +8,8 @@ echo $ip
 
 sed -i -e "s/192.168.56.103/$ip/g" conf/my.conf
 
-
+docker stop frontend
+docker rm frontend
+docker rmi frontend
 docker build -t frontend .
-docker run --name frontend -d -p 9000:9000 frontend
+docker run --name frontend -d -p 9100:9100 frontend

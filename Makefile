@@ -7,4 +7,4 @@ build:
 run:
 	pnpm run dev
 deloy:
-  bash deloy.sh
+  echo "test"
