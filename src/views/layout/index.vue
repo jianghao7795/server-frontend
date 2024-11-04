@@ -145,7 +145,7 @@
 
 <script setup lang="ts" name="Layout">
 import { onMounted, ref, watch, provide, computed, h } from "vue";
-import type { CSSProperties } from "vue";
+// import type { CSSProperties } from "vue";
 import type { FormInst } from "naive-ui";
 import { NIcon } from "naive-ui";
 import { RouterView, useRouter, useRoute } from "vue-router";
@@ -427,23 +427,23 @@ const login = () => {
   });
 };
 
-const railStyle = ({ checked }: { checked: boolean }) => {
-  const style: CSSProperties = { lineHeight: "1rem" };
-  if (checked) {
-    style.background = "#222";
-  } else {
-    style.background = "#eee";
-  }
-  return style;
-};
+// const railStyle = ({ checked }: { checked: boolean }) => {
+//   const style: CSSProperties = { lineHeight: "1rem" };
+//   if (checked) {
+//     style.background = "#222";
+//   } else {
+//     style.background = "#eee";
+//   }
+//   return style;
+// };
 
-const changeTheme = (e: boolean) => {
-  if (e) {
-    emitter.emit("darkMode");
-  } else {
-    emitter.emit("lightMode");
-  }
-};
+// const changeTheme = (e: boolean) => {
+//   if (e) {
+//     emitter.emit("darkMode");
+//   } else {
+//     emitter.emit("lightMode");
+//   }
+// };
 
 watch(
   () => route.fullPath,

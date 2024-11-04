@@ -16,6 +16,7 @@ coverage
 conf/config.conf
 /cypress/videos/
 /cypress/screenshots/
+conf/config.conf
 
 # Editor directories and files
 .vscode/*
