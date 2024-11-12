@@ -62,6 +62,9 @@ service.interceptors.response.use(
     // HTTP 状态码
     const status = error.response?.status;
     switch (status) {
+      case 400:
+        message = "请求错误";
+        break;
       case 401:
         message = "token 失效，请重新登录";
         break;
