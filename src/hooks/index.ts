@@ -1,3 +1,2 @@
-import useLoading from './loading/useLoading';
-
+import useLoading from "./loading/useLoading";
 export { useLoading };
