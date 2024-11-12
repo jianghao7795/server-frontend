@@ -158,7 +158,7 @@ import { updateBackgroundImage } from "@/services/user";
 import Register from "./components/register.vue";
 import Person from "./components/person.vue";
 import ResetPassord from "./components/reset_password.vue";
-import md5 from "md5";
+// import md5 from "md5";
 import { getToSession, saveToSession } from "@/utils/util";
 let scrollSize = 0;
 
@@ -413,7 +413,7 @@ const changeLogin = (status: boolean): void => {
 provide("changeLogin", changeLogin); // 传递方法给下级
 
 const login = () => {
-  userStore.logins({ username: userInfo.value.name, password: md5(userInfo.value.password) }, () => {
+  userStore.logins({ username: userInfo.value.name, password: userInfo.value.password }, () => {
     getImages().then((resp) => {
       if (resp) {
         bgImage.value = resp.data;
@@ -496,7 +496,7 @@ onMounted(async () => {
     loadingFlag.value = false;
   });
   if (token) {
-    await userStore.getUser(async (head_img: string) => {
+    await userStore.getUser(async () => {
       const resp = await getImages();
       if (resp?.code === 200) {
         bgImage.value = resp.data;
@@ -528,7 +528,7 @@ const submit = () => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="css">
 .carousel-img {
   width: 100%;
   /* // height: 240px; */

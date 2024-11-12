@@ -38,10 +38,13 @@ export const useUserStore = defineStore("user", {
       try {
         const info = await login(data);
         this.loading = false;
-        this.currentUser = info.data;
-        callback();
-        localStorage.setItem("token", info.data.token);
-        window.$message.success("登陆成功");
+        if (info.code === 200) {
+          this.currentUser = info.data;
+          // callback();
+          localStorage.setItem("token", info.data.token);
+          window.$message.success("登陆成功");
+          callback();
+        }
       } catch (e) {
         this.loading = false;
         window.$message.error("登录失败");
