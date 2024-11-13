@@ -571,7 +571,7 @@ const submit = () => {
 }
 
 .toopli {
-  display: inline-block;
+  /* display: inline-block; */
   margin: 0;
   padding: 0;
 }

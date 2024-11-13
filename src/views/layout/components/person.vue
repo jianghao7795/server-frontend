@@ -89,6 +89,7 @@ watch(
 const changeCustomRequest = (options: UploadCustomRequestOptions) => {
   const formData = new FormData();
   formData.append("file", options.file.file as File, options.file.name);
+  formData.append("is_cropper", "3");
   uploadFile(formData)
     .then((resp) => {
       if (resp.code === 200) {
