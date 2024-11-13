@@ -55,7 +55,7 @@
       </h3>
       <div>
         <n-collapse arrow-placement="right">
-          <n-collapse-item v-for="item in comment" :name="item.ID" :key="item.ID">
+          <n-collapse-item v-for="item in articleStore.comment" :name="item.ID" :key="item.ID">
             <template class="img-txt" #header>
               <div>
                 <span>{{ item.user.nickName }}:</span>
@@ -86,7 +86,7 @@ import "md-editor-v3/lib/style.css";
 import { useArticleStore } from "@/stores/article";
 import type { GlobalTheme } from "naive-ui";
 import { NInput } from "naive-ui";
-import { getArticleComment, createdComment } from "@/services/comment";
+import { createdComment } from "@/services/comment";
 
 const Base_URL = import.meta.env.VITE_BASE_API + "/";
 const route = useRoute();
@@ -99,7 +99,7 @@ const avatar = computed(() =>
 // const isComment = ref<boolean>(false);
 // const isCommentChildren = ref<{ [id: number]: boolean }>({});
 const commentString = ref<string>("");
-const comment = ref<Comment.comment[]>([]);
+// const comment = ref<Comment.comment[]>([]); /
 
 const submit = async () => {
   const resp = await createdComment({
@@ -115,9 +115,10 @@ const submit = async () => {
     window.$message.success("评论成功");
     // comment.value = [];
     const params = route.params;
-    const respComment = await getArticleComment({ articleId: params.id as string });
-    comment.value = respComment.data;
-    commentString.value = "";
+    // const respComment = await getArticleComment({ articleId: params.id as string });
+    // comment.value = respComment.data;
+    // commentString.value = "";
+    articleStore.getComment({ id: Number(params.id).valueOf() });
   }
 };
 // const inputRef = ref<string>("");
@@ -223,9 +224,9 @@ const changeDate = (timeData?: string): string => {
 
 onMounted(async () => {
   const params = route.params;
-  articleStore.getDetail({ id: params.id as string });
-  const resp = await getArticleComment({ articleId: params.id as string });
-  comment.value = resp.data;
+  articleStore.getDetail({ id: Number(params.id).valueOf() });
+  // const resp = await getArticleComment({ articleId: params.id as string });
+  // comment.value = resp.data;
 });
 </script>
 

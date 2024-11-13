@@ -10,7 +10,7 @@ export const getArticleList = (params?: API.SearchArticle) => {
   });
 };
 
-export const getArticleDetail = (id: string) => {
+export const getArticleDetail = (id: number) => {
   return http.get<Global.Response<API.Article>>(`/getArticle/${id}`, {
     method: "get",
   });
@@ -18,8 +18,11 @@ export const getArticleDetail = (id: string) => {
 
 // 搜索文章的 tag 或 title
 export const getArticleSearch = (params: API.SearchArticle) => {
-  return http.get<Global.Response<{ list: API.Article[]; total: number }>>(`/getSearchArticle/${params.name}/${params.value}`, {
-    method: "get",
-    params: { sort: params.sort },
-  });
+  return http.get<Global.Response<{ list: API.Article[]; total: number }>>(
+    `/getSearchArticle/${params.name}/${params.value}`,
+    {
+      method: "get",
+      params: { sort: params.sort },
+    },
+  );
 };

@@ -1,6 +1,6 @@
 import { getArticleList, getArticleDetail } from "@/services/article";
 import { defineStore } from "pinia";
-
+import { getArticleComment } from "@/services/comment";
 // export const mainStore = defineStore('main', {
 //     /**
 //      * 类似组件的 data, 用于存储全局的的状态
@@ -37,6 +37,7 @@ export const useArticleStore = defineStore("article", {
     total: number;
     showMore: boolean;
     loading: boolean;
+    comment: Comment.comment[];
   } => {
     return {
       page: 1,
@@ -45,6 +46,7 @@ export const useArticleStore = defineStore("article", {
       total: 0,
       showMore: true,
       loading: false,
+      comment: [],
     };
   },
   getters: {},
@@ -64,10 +66,18 @@ export const useArticleStore = defineStore("article", {
       }
     },
 
-    async getDetail(payload: { id: string }) {
+    async getDetail(payload: { id: number }) {
       const resp = await getArticleDetail(payload.id);
       if (resp.code === 200) {
         this.detail = resp.data;
+        this.getComment(payload);
+      }
+    },
+
+    async getComment(payload: { id: number }) {
+      const respComment = await getArticleComment(payload.id);
+      if (respComment.code === 200) {
+        this.comment = respComment.data;
       }
     },
   },

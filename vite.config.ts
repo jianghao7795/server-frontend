@@ -51,7 +51,7 @@ export default defineConfig((userConfig) => {
         },
       },
     },
-    base: "./", // index.html文件所在位置
+    base: "/", // index.html文件所在位置
     root: "./", // js导入的资源路径，src
     server: {
       // 如果使用docker-compose开发模式，设置为false
