@@ -11,5 +11,13 @@ sed -i -e "s/127.0.0.1/$ip/g" conf/config.conf
 docker stop frontend
 docker rm frontend
 docker rmi frontend
+
+if [ $ip == "192.168.56.103" ]
+then
+  docker build --progress=plain -t backend .
+else
+  docker build --progress=plain -f DockerfileHome -t backend .
+fi
+
 docker build --progress=plain -t frontend .
 docker run --name frontend -d -p 9100:9100 frontend
