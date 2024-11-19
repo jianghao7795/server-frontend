@@ -19,5 +19,5 @@ else
   docker build --progress=plain -f DockerfileHome -t frontend .
 fi
 
-docker build --progress=plain -t frontend .
+# docker build --progress=plain -t frontend .
 docker run --name frontend -d -p 9100:9100 frontend
