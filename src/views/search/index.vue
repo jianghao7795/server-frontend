@@ -3,15 +3,21 @@
     <n-page-header @back="handleBack">
       <div>
         <n-h4 class="sortH4">
-          <a v-bind:style="{
-            color: colorRef.time ? '#70a1ff' : undefined,
-          }" @click="() => changeSort('time')">
+          <a
+            v-bind:style="{
+              color: colorRef.time ? '#70a1ff' : undefined,
+            }"
+            @click="() => changeSort('time')"
+          >
             时间排序
           </a>
           <n-divider vertical />
-          <a v-bind:style="{
-            color: colorRef.read ? '#70a1ff' : undefined,
-          }" @click="() => changeSort('read')">
+          <a
+            v-bind:style="{
+              color: colorRef.read ? '#70a1ff' : undefined,
+            }"
+            @click="() => changeSort('read')"
+          >
             阅读排序
           </a>
         </n-h4>

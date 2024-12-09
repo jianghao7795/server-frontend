@@ -1,13 +1,22 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["./src/**/*", "./src/**/*.vue", "./src/types/**/*"],
+  "include": [
+    "./src/**/*",
+    "./src/**/*.vue",
+    "./src/types/**/*"
+  ],
   "compilerOptions": {
     "ignoreDeprecations": "5.0",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     },
-    "types": ["naive-ui/volar", "vite/client"],
+    "types": [
+      "naive-ui/volar",
+      "vite/client"
+    ],
     "module": "ESNext",
     "target": "ESNext",
     "strict": false,
@@ -22,7 +31,10 @@
     "allowJs": true,
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": ["**/node_modules/**", "**/dist/**"],
+  "exclude": [
+    "**/node_modules/**",
+    "**/dist/**"
+  ],
   "references": [
     {
       "path": "./tsconfig.config.json"
