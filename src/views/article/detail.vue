@@ -230,7 +230,7 @@ onMounted(async () => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .img-txt {
   max-height: 34px;
   display: flex;
