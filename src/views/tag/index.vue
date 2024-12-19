@@ -1,7 +1,15 @@
 <template>
   <div class="view-content">
     <n-space>
-      <n-button strong secondary round v-for="(item, index) in tagList" :key="item.ID" :type="colorIndex(index)" @click="searchArticle(item.name)">
+      <n-button
+        strong
+        secondary
+        round
+        v-for="(item, index) in tagList"
+        :key="item.ID"
+        :type="colorIndex(index)"
+        @click="searchArticle(item.name)"
+      >
         {{ item.name }}
       </n-button>
     </n-space>

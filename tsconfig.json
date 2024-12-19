@@ -2,6 +2,7 @@
   "extends": "@vue/tsconfig/tsconfig.web.json",
   "include": ["./src/**/*", "./src/**/*.vue", "./src/types/**/*"],
   "compilerOptions": {
+    "verbatimModuleSyntax": false,
     "ignoreDeprecations": "5.0",
     "baseUrl": ".",
     "paths": {
