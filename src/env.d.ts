@@ -1,9 +1,7 @@
-import type { MessageProviderInst, NotificationProviderInst, LoadingBarProviderInst } from "naive-ui";
+// /// <reference types="vite/client" />
 
-declare global {
-  interface Window {
-    $message: MessageProviderInst;
-    $notification: NotificationProviderInst;
-    $loadingBar: LoadingBarProviderInst;
-  }
-}
+// declare module "*.vue" {
+//   import { DefineComponent } from "vue";
+//   const component: DefineComponent<{}, {}, any>;
+//   export default component;
+// }

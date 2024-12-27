@@ -1,5 +1,4 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.web.json",
   "include": ["./src/**/*", "./src/**/*.vue", "./src/types/**/*"],
   "compilerOptions": {
     "ignoreDeprecations": "5.0",
@@ -22,10 +21,5 @@
     "allowJs": true,
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": ["**/dist/**"],
-  "references": [
-    {
-      "path": "./tsconfig.config.json"
-    }
-  ]
+  "exclude": ["**/dist/**"]
 }
