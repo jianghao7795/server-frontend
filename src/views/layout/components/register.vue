@@ -1,15 +1,41 @@
 <template>
-  <n-drawer v-model:show="props.registerStatus" :width="502" placement="left" :on-update:show="(show: boolean) => emits('changeStatus', show)">
+  <n-drawer
+    v-model:show="props.registerStatus"
+    :width="502"
+    placement="left"
+    :on-update:show="(show: boolean) => emits('changeStatus', show)"
+  >
     <n-drawer-content title="注册" closable>
-      <n-form ref="formRef" :model="userRegister" :rules="rules" label-placement="left" label-width="auto" require-mark-placement="right-hanging" size="large">
+      <n-form
+        ref="formRef"
+        :model="userRegister"
+        :rules="rules"
+        label-placement="left"
+        label-width="auto"
+        require-mark-placement="right-hanging"
+        size="large"
+      >
         <n-form-item path="name">
           <n-input type="text" v-model:value="userRegister.name" :clearable="true" placeholder="账号" />
         </n-form-item>
         <n-form-item path="password">
-          <n-input :clearable="true" type="password" :minlength="6" show-password-on="click" v-model:value="userRegister.password" placeholder="密码" />
+          <n-input
+            :clearable="true"
+            type="password"
+            :minlength="6"
+            show-password-on="click"
+            v-model:value="userRegister.password"
+            placeholder="密码"
+          />
         </n-form-item>
         <n-form-item path="re_password">
-          <n-input type="password" :clearable="true" show-password-on="click" v-model:value="userRegister.re_password" placeholder="重复密码" />
+          <n-input
+            type="password"
+            :clearable="true"
+            show-password-on="click"
+            v-model:value="userRegister.re_password"
+            placeholder="重复密码"
+          />
         </n-form-item>
         <n-form-item path="introduction">
           <n-input type="text" v-model:value="userRegister.introduction" placeholder="简介" :clearable="true" />
@@ -40,7 +66,9 @@
           </n-upload>
         </n-form-item>
         <div>
-          <n-button :loading="userStore.loadingRegister" type="primary" :block="true" @click="() => register()">注册</n-button>
+          <n-button :loading="userStore.loadingRegister" type="primary" :block="true" @click="() => register()">
+            注册
+          </n-button>
         </div>
       </n-form>
     </n-drawer-content>
@@ -51,6 +79,7 @@
 import { ref } from "vue"; // defineExpose 组件暴露自己的属性
 import { useUserStore } from "@/stores/user";
 import type { FormItemRule, UploadFileInfo, UploadCustomRequestOptions } from "naive-ui";
+import { NDrawer, NDrawerContent, NForm, NFormItem, NUpload, NButton, NInput } from "naive-ui";
 import { uploadFile } from "@/services/fileUpload";
 const props = defineProps<{
   registerStatus: boolean;
@@ -105,7 +134,11 @@ const register = () => {
 };
 
 function validatePasswordStartWith(rule: FormItemRule, value: string): boolean {
-  return !!userRegister.value.password && userRegister.value.password.startsWith(value) && userRegister.value.password.length >= value.length;
+  return (
+    !!userRegister.value.password &&
+    userRegister.value.password.startsWith(value) &&
+    userRegister.value.password.length >= value.length
+  );
 }
 function validatePasswordSame(rule: FormItemRule, value: string): boolean {
   return value === userRegister.value.password;

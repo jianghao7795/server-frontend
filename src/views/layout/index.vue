@@ -147,7 +147,31 @@
 import { onMounted, ref, watch, provide, computed, h } from "vue";
 // import type { CSSProperties } from "vue";
 import type { FormInst } from "naive-ui";
-import { NIcon } from "naive-ui";
+import {
+  NIcon,
+  NDrawer,
+  NDrawerContent,
+  NForm,
+  NFormItem,
+  NButton,
+  NCarousel,
+  NPopconfirm,
+  NCarouselItem,
+  NLayout,
+  NInput,
+  NTab,
+  NSpace,
+  NAvatar,
+  NTabs,
+  NSpin,
+  NDropdown,
+  NCard,
+  NLayoutHeader,
+  NDivider,
+  NLayoutContent,
+  NBackTop,
+  NLayoutFooter,
+} from "naive-ui";
 import { RouterView, useRouter, useRoute } from "vue-router";
 import { Search, Logout, Change, SettingTwo, Lock } from "@icon-park/vue-next";
 import dayjs from "dayjs";

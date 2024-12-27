@@ -76,6 +76,7 @@
 </template>
 
 <script lang="ts" setup name="ArticleDetail">
+import { NAvatar, NTag, NSpace, NDivider, NCollapse, NCollapseItem, NPageHeader } from "naive-ui";
 import { onMounted, inject, ref, type Ref, computed } from "vue";
 // import type { KeyboardEvent } from "vue";
 import { useRoute, useRouter } from "vue-router";

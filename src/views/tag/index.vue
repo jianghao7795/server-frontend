@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup name="Tag">
-// import { NSpace, NButton } from "naive-ui";
+import { NSpace, NButton } from "naive-ui";
 import { getTagList } from "@/services/tag";
 import { onMounted, ref } from "vue";
 import { colorIndex } from "@/common/article";

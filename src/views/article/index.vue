@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts" setup name="Article">
-// import { NList, NThing, NListItem, NSpace, NTag, NButton } from "naive-ui";
+import { NList, NThing, NListItem, NSpace, NTag, NButton, NDivider } from "naive-ui";
 import { onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import { colorIndex } from "@/common/article";

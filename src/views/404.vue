@@ -7,6 +7,7 @@
 </template>
 
 <script lang="ts" setup name="404">
+import { NResult, NButton } from "naive-ui";
 import { useRouter } from "vue-router";
 
 const router = useRouter();

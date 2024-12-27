@@ -1,5 +1,10 @@
 <template>
-  <n-drawer v-model:show="props.active" :width="502" placement="right" :on-update:show="(e) => emits('changeStatus', e)">
+  <n-drawer
+    v-model:show="props.active"
+    :width="502"
+    placement="right"
+    :on-update:show="(e) => emits('changeStatus', e)"
+  >
     <n-drawer-content title="修改密码">
       <n-form
         ref="formRef"
@@ -14,10 +19,20 @@
           <n-input type="password" show-password-on="click" v-model:value="userPassword.password" placeholder="密码" />
         </n-form-item>
         <n-form-item path="password">
-          <n-input type="password" show-password-on="click" v-model:value="userPassword.new_password" placeholder="新密码" />
+          <n-input
+            type="password"
+            show-password-on="click"
+            v-model:value="userPassword.new_password"
+            placeholder="新密码"
+          />
         </n-form-item>
         <n-form-item path="password">
-          <n-input type="password" show-password-on="click" v-model:value="userPassword.repeat_new_password" placeholder="重复新密码" />
+          <n-input
+            type="password"
+            show-password-on="click"
+            v-model:value="userPassword.repeat_new_password"
+            placeholder="重复新密码"
+          />
         </n-form-item>
         <div>
           <n-button :loading="loading" type="primary" :block="true" @click="submit">提交</n-button>
@@ -28,6 +43,7 @@
 </template>
 <script setup lang="ts" name="ResetPassword">
 import { ref } from "vue";
+import { NDrawer, NDrawerContent, NForm, NFormItem, NInput, NButton } from "naive-ui";
 import type { FormInst, FormItemRule } from "naive-ui";
 import { useUserStore } from "@/stores/user";
 import { resetPassword } from "@/services/user";
@@ -61,7 +77,11 @@ const submit = () => {
 };
 
 function validatePasswordStartWith(rule: FormItemRule, value: string): boolean {
-  return !!userPassword.value.password && userPassword.value.password.startsWith(value) && userPassword.value.password.length >= value.length;
+  return (
+    !!userPassword.value.password &&
+    userPassword.value.password.startsWith(value) &&
+    userPassword.value.password.length >= value.length
+  );
 }
 function validatePasswordSame(rule: FormItemRule, value: string): boolean {
   return value === userPassword.value.password;

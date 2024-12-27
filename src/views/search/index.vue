@@ -75,7 +75,7 @@
 </template>
 
 <script setup lang="ts" name="Search">
-// import { NList, NThing, NListItem, NSpace, NTag, NButton, NEmpty } from "naive-ui";
+import { NList, NThing, NListItem, NSpace, NTag, NButton, NEmpty } from "naive-ui";
 import { ref, onMounted, computed, watch } from "vue";
 import { getArticleSearch } from "@/services/article";
 import { Right } from "@icon-park/vue-next";

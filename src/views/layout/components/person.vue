@@ -41,6 +41,7 @@
 
 <script lang="ts" name="Person" setup>
 import { ref, watch } from "vue";
+import { NInput, NForm, NFormItem, NUpload, NDrawer, NDrawerContent, NButton } from "naive-ui";
 import type { FormInst, UploadFileInfo, UploadCustomRequestOptions } from "naive-ui";
 import { useUserStore } from "@/stores/user";
 import { Base_URL } from "@/common/article";
