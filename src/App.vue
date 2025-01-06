@@ -12,7 +12,7 @@ import {
   NNotificationProvider,
   NMessageProvider,
 } from "naive-ui";
-import { emitter } from "./utils/common";
+import { emitter } from "@/utils/common";
 import { useDark, useToggle } from "@vueuse/core";
 
 const isDark = useDark();
