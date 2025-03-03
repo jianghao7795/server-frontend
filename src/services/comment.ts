@@ -5,9 +5,9 @@ export const getArticleComment = (id: number) => {
   //   url: "/frontend/getArticleList",
   //   method: "get",
   // });
-  return http.get<Global.Response<Comment.comment[]>>(`/getArticleComment/${id}`);
+  return http.get<GlobalTypes.Response<Comment.comment[]>>(`/getArticleComment/${id}`);
 };
 
 export const createdComment = (data: Comment.createcomment) => {
-  return http.post<Global.Response<{ id: number }>>(`/createdComment`, data);
+  return http.post<GlobalTypes.Response<{ id: number }>>(`/createdComment`, data);
 };

@@ -87,7 +87,7 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _, next) => {
   window.document.title = to.meta.title as string;
   window.$loadingBar.start();
   next();

@@ -5,20 +5,20 @@ export const getArticleList = (params?: API.SearchArticle) => {
   //   url: "/frontend/getArticleList",
   //   method: "get",
   // });
-  return http.get<Global.Response<{ list: API.Article[]; total: number }>>("/getArticleList", {
+  return http.get<GlobalTypes.Response<{ list: API.Article[]; total: number }>>("/getArticleList", {
     params: params,
   });
 };
 
 export const getArticleDetail = (id: number) => {
-  return http.get<Global.Response<API.Article>>(`/getArticle/${id}`, {
+  return http.get<GlobalTypes.Response<API.Article>>(`/getArticle/${id}`, {
     method: "get",
   });
 };
 
 // 搜索文章的 tag 或 title
 export const getArticleSearch = (params: API.SearchArticle) => {
-  return http.get<Global.Response<{ list: API.Article[]; total: number }>>(
+  return http.get<GlobalTypes.Response<{ list: API.Article[]; total: number }>>(
     `/getSearchArticle/${params.name}/${params.value}`,
     {
       method: "get",

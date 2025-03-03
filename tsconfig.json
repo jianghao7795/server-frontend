@@ -4,9 +4,9 @@
     "ignoreDeprecations": "5.0",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"]
     },
-    "types": ["naive-ui/volar", "vite/client"],
+    "types": ["naive-ui/volar", "vite/client", "vue"],
     "module": "ESNext",
     "target": "ESNext",
     "strict": false,

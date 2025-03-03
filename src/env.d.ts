@@ -1,13 +1,7 @@
-declare namespace Global {
-  export type Response<T> = {
-    code: 200 | 400 | 401 | 403 | 404 | 500;
-    data: T;
-    msg: string;
-  };
+/// <reference types="vite/client" />
 
-  export type ResponseAbout<T> = {
-    code: 200 | 400 | 401 | 403 | 404 | 500;
-    data?: T;
-    msg: string;
-  };
+declare module "*.vue" {
+  import type { DefineComponent } from "vue";
+  const component: DefineComponent<{}, {}, any>;
+  export default component;
 }
