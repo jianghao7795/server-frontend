@@ -1,4 +1,4 @@
-import Content from "./content.vue";
+import Content from "./content";
 import { useUserStore } from "@/stores/user";
 import Header from "./header";
 import { defineComponent } from "vue";
@@ -18,7 +18,6 @@ export default defineComponent({
         )}
         {!userStore.currentUser?.user?.ID && <div>请登录！</div>}
         <Header />
-        tstsfasdf
       </div>
     );
   },
