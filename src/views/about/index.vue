@@ -7,11 +7,13 @@
       </div>
     </div>
     <div v-else>请登录！</div>
+    <Header />
   </div>
 </template>
 
 <script lang="ts" name="About" setup>
 import Content from "./content.vue";
 import { useUserStore } from "@/stores/user";
+import Header from "./header";
 const userStore = useUserStore();
 </script>
