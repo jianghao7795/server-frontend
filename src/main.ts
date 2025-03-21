@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import "@/static/less/content.less";
-import App from "@/App.vue";
+import App from "@/App";
 import router from "@/router";
 // import UndrawUi from "undraw-ui";
 // import "undraw-ui/dist/style.css";
