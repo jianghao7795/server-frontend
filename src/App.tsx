@@ -55,8 +55,8 @@ export default defineComponent({
 
     return () => {
       return (
-        <NConfigProvider Theme={theme} ThemeOverrides={themeOverrides}>
-          <NLoadingBarProvider LoadingBarStyle={{ loading: { height: "4px" } }}>
+        <NConfigProvider theme={theme.value} ThemeOverrides={themeOverrides}>
+          <NLoadingBarProvider>
             <div class="view-dark view-comment">
               <NNotificationProvider>
                 <NMessageProvider>
