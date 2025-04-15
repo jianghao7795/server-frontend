@@ -561,7 +561,7 @@ const submit = () => {
 
 .headerStyleLine {
   font-size: 15px;
-  line-height: 41px;
+  line-height: 35px;
   max-height: 41px;
 }
 
@@ -638,7 +638,7 @@ const submit = () => {
 
 .search {
   width: 0px;
-  margin-top: 5px;
+  margin-top: 0px;
   transition-property: width;
   transition-duration: 0.5s;
   transition-timing-function: linear;
