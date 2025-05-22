@@ -29,7 +29,7 @@ const router = createRouter({
         {
           path: "/tags",
           name: "tag",
-          component: () => import("@/views/tag/index.vue"),
+          component: () => import("@/views/tag"),
           meta: {
             title: "标签",
           },
@@ -53,7 +53,7 @@ const router = createRouter({
         {
           path: "/:name/search/:value",
           name: "search",
-          component: () => import("@/views/search/index.vue"),
+          component: () => import("@/views/search"),
           meta: {
             title: "搜索结果",
           },
@@ -61,7 +61,7 @@ const router = createRouter({
         {
           path: "/:pathMatch(.*)*",
           name: "NotFound",
-          component: () => import("@/views/404.vue"),
+          component: () => import("@/views/404"),
           meta: {
             title: "404",
           },

@@ -59,50 +59,53 @@
 </template>
 
 <script setup lang="ts" name="Home">
-import { NList, NThing, NListItem, NSpace, NTag, NButton, NEmpty, NDivider } from "naive-ui";
-import { ref, onMounted } from "vue";
-import { getArticleList } from "@/services/article";
-import { PreviewOpen, StopwatchStart, UserBusiness } from "@icon-park/vue-next";
-import { useRouter } from "vue-router";
-import { colorIndex } from "@/common/article";
-import { calculationTime } from "@/utils/date";
+  import { NList, NThing, NListItem, NSpace, NTag, NButton, NEmpty, NDivider } from "naive-ui";
+  import { ref, onMounted } from "vue";
+  import { getArticleList } from "@/services/article";
+  import { PreviewOpen, StopwatchStart, UserBusiness } from "@icon-park/vue-next";
+  import { useRouter } from "vue-router";
+  import { colorIndex } from "@/common/article";
+  import { calculationTime } from "@/utils/date";
 
-const router = useRouter();
+  const router = useRouter();
 
-const data = ref<API.Article[]>([]);
+  const data = ref<API.Article[]>([]);
 
-const changeUrl = (id: number) => {
-  router.push(`/articles/${id}`);
-};
+  const changeUrl = (id: number) => {
+    router.push(`/articles/${id}`);
+  };
 
-onMounted(async () => {
-  const response = await getArticleList({ page: 1, is_important: 1 });
-  if (response?.code === 200) {
-    data.value = response.data?.list as API.Article[];
-  }
-});
+  onMounted(async () => {
+    const response = await getArticleList({ page: 1, is_important: 1 });
+    if (response?.code === 200) {
+      data.value = response.data?.list as API.Article[];
+    }
+  });
 
-const changeLookOther = () => {
-  router.push("/articles");
-};
+  const changeLookOther = () => {
+    router.push("/articles");
+  };
 </script>
 
 <style scoped lang="less">
-.article-list {
-  margin: auto 25%;
-}
+  .article-list {
+    margin: auto 25%;
+  }
 
-.pageNext {
-  margin: 15px 0 45px 0;
-}
-.description {
-  text-align: center;
-  a {
-    font-size: 13px;
+  .pageNext {
+    margin: 15px 0 45px 0;
   }
-  .i-icon {
-    width: 12px;
-    height: 12px;
+
+  .description {
+    text-align: center;
+
+    a {
+      font-size: 13px;
+    }
+
+    .i-icon {
+      width: 12px;
+      height: 12px;
+    }
   }
-}
 </style>

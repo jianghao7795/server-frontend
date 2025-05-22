@@ -1,5 +1,5 @@
 {
-  "include": ["./src/**/*", "./src/**/*.vue", "./src/types/**/*"],
+  "include": ["./src/**/*.tsx", "./src/**/*.ts", "./src/**/*.vue", "./src/types/**/*"],
   "compilerOptions": {
     "ignoreDeprecations": "5.0",
     "baseUrl": ".",
