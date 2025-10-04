@@ -80,9 +80,10 @@ service.interceptors.response.use(
       default:
         message = "网络连接故障";
     }
+    // console.log(error.response?.data.data);
     window.$notification.error({
       content: `错误 ${!!status ? status : ""}: ${message}`,
-      meta: error?.response?.data?.msg || error.response?.statusText,
+      meta: error?.response?.data?.data?.msg || error.response?.statusText || error.response?.data?.data,
       duration: 10000,
       keepAliveOnHover: true,
     });
