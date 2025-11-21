@@ -1,4 +1,4 @@
-FROM node:18.20.7-bullseye-slim AS builder
+FROM node:18.20.7 AS builder
 LABEL org.opencontainers.image.authors="jianghao"
 RUN mkdir -p /app
 WORKDIR /app
