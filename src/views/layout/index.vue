@@ -176,10 +176,9 @@ import {
   NLayoutContent,
   NBackTop,
   NLayoutFooter,
-  NImage,
 } from "naive-ui";
 import { RouterView, useRouter, useRoute } from "vue-router";
-import { Search, Logout, Change, SettingTwo, Lock, Avatar } from "@icon-park/vue-next";
+import { Search, Logout, Change, SettingTwo, Lock } from "@icon-park/vue-next";
 import dayjs from "dayjs";
 import { emitter } from "@/utils/common";
 import { getImages } from "@/services/image";

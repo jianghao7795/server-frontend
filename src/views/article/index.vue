@@ -18,7 +18,7 @@
               &nbsp;
               <a>{{ calculationTime(item.CreatedAt) }}</a>
               <n-divider vertical />
-              <preview-open theme="outline" size="18" fill="#b4b1b1" strokeLinejoin="miter" strokeLinecap="square" />
+              <preview-open theme="outline" size="16" fill="#b4b1b1" strokeLinejoin="miter" strokeLinecap="square" />
               &nbsp;
               <a>{{ item.reading_quantity.toLocaleString() }}</a>
             </div>
@@ -95,13 +95,11 @@ onMounted(async () => {
   justify-content: flex-end;
 }
 .description {
-  text-align: center;
-  a {
-    font-size: 13px;
-  }
-  .i-icon {
-    width: 12px;
-    height: 12px;
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  span {
+    margin-top: 4px;
   }
 }
 </style>

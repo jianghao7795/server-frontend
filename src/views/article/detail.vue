@@ -21,7 +21,11 @@
         <NSpace vertical>
           <div class="img-txt">
             作者：
-            <n-avatar round size="small" :src="avatar" object-fit="cover" />
+            <n-avatar round size="small" :src="avatar" object-fit="cover">
+              <template #fallback>
+                <img src="/tx.jpg" alt="avatar" />
+              </template>
+            </n-avatar>
             &nbsp;
             {{ articleStore.detail?.user?.userName }}
           </div>
