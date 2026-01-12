@@ -62,7 +62,11 @@
                   :show-arrow="true"
                   @select="userLogout"
                 >
-                  <n-avatar round size="small" :src="headImage"></n-avatar>
+                  <n-avatar round size="small" :src="headImage">
+                    <template #fallback>
+                      <img src="/tx.jpg" alt="avatar" />
+                    </template>
+                  </n-avatar>
                 </n-dropdown>
               </b>
               <span v-else>
@@ -105,6 +109,7 @@
                   :src="item.url.includes('http') ? item.url : `${Base_URL}/${item.url}`"
                   :title="item.name"
                   class="carousel-img"
+                  @error="handleImageError"
                 />
               </template>
               确定更换背景图片？
@@ -146,7 +151,7 @@
 <script setup lang="ts" name="Layout">
 import { onMounted, ref, watch, provide, computed, h } from "vue";
 // import type { CSSProperties } from "vue";
-import type { FormInst } from "naive-ui";
+// import type { FormInst } from "naive-ui";
 import {
   NIcon,
   NDrawer,
@@ -171,9 +176,10 @@ import {
   NLayoutContent,
   NBackTop,
   NLayoutFooter,
+  NImage,
 } from "naive-ui";
 import { RouterView, useRouter, useRoute } from "vue-router";
-import { Search, Logout, Change, SettingTwo, Lock } from "@icon-park/vue-next";
+import { Search, Logout, Change, SettingTwo, Lock, Avatar } from "@icon-park/vue-next";
 import dayjs from "dayjs";
 import { emitter } from "@/utils/common";
 import { getImages } from "@/services/image";
@@ -215,14 +221,59 @@ const changeScroll = (e: Event) => {
   }
 };
 
+const userStore = useUserStore();
 const Base_URL = import.meta.env.VITE_BASE_API as string;
 const headImage = computed(() => `${Base_URL}/${userStore.currentUser?.user?.headerImg}`);
-const colorSet = computed(
-  () =>
-    `url(${new URL(userStore.currentUser?.user?.head_img ? `${Base_URL}/${userStore.currentUser.user.head_img}` : "/home-bg.png", import.meta.url).href})`,
+// 默认背景图路径
+const defaultBgImage = `/home-bg.png`;
+// 实际使用的背景图 URL，初始值为默认背景图
+const actualBgImage = ref<string>(new URL(defaultBgImage, import.meta.url).href);
+
+const handleImageError = (e: Event) => {
+  console.log(e);
+  actualBgImage.value = new URL(defaultBgImage, import.meta.url).href;
+};
+
+// 计算背景图 URL
+const computedBgImageUrl = computed(() => {
+  if (userStore.currentUser?.user?.head_img) {
+    const imageUrl = userStore.currentUser.user.head_img.includes("http")
+      ? userStore.currentUser.user.head_img
+      : `${Base_URL}/${userStore.currentUser.user.head_img}`;
+    return new URL(imageUrl, import.meta.url).href;
+  }
+  return new URL(defaultBgImage, import.meta.url).href;
+});
+
+// 检测图片是否可以加载
+const checkImageLoad = () => {
+  const img = new Image();
+  const imageUrl = computedBgImageUrl.value;
+
+  img.onload = () => {
+    // 图片加载成功
+    actualBgImage.value = imageUrl;
+  };
+
+  img.onerror = () => {
+    // 图片加载失败（404等），使用默认值
+    actualBgImage.value = new URL(defaultBgImage, import.meta.url).href;
+  };
+
+  img.src = imageUrl;
+};
+
+// 监听用户信息变化，重新检测图片
+watch(
+  () => userStore.currentUser?.user?.head_img,
+  () => {
+    checkImageLoad();
+  },
+  { immediate: true },
 );
 
-const userStore = useUserStore();
+const colorSet = computed(() => `url(${actualBgImage.value})`);
+
 const route = useRoute();
 const router = useRouter();
 const searchInputRef = ref<HTMLInputElement>();
@@ -246,7 +297,7 @@ const personalInformationStatus = ref<boolean>(false);
 // const theme = inject<Ref<GlobalTheme | null>>("theme");
 // const darkTheme = computed(() => !(theme?.value === null));
 //form Ref
-const formRef = ref<FormInst | null>(null);
+// const formRef = ref<FormInst | null>(null);
 // 修改密码status
 const revisePassword = ref<boolean>(false);
 // const isSearch = ref<boolean>(false);
