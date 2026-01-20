@@ -5,7 +5,7 @@ import App from "@/App";
 import router from "@/router";
 // import UndrawUi from "undraw-ui";
 // import "undraw-ui/dist/style.css";
-import "./index.less";
+// import "./index.css";
 
 const app = createApp(App);
 

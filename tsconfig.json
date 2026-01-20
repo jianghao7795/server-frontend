@@ -1,25 +1,36 @@
 {
-  "include": ["./src/**/*.tsx", "./src/**/*.ts", "./src/**/*.vue", "./src/types/**/*"],
+  "include": [
+    "./src/**/*.tsx",
+    "./src/**/*.ts",
+    "./src/types/**/*"
+  ],
   "compilerOptions": {
-    "ignoreDeprecations": "5.0",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "types": [
+      "vite/client",
+      "node"
+    ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
-    },
-    "types": ["naive-ui/volar", "vite/client", "vue"],
-    "module": "ESNext",
-    "target": "ESNext",
-    "strict": false,
-    "esModuleInterop": true,
-    "jsx": "preserve",
-    "skipLibCheck": true,
-    "isolatedModules": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "noUnusedLocals": true,
-    "strictNullChecks": true,
-    "allowJs": true,
-    "forceConsistentCasingInFileNames": true
+      "@/*": [
+        "src/*"
+      ] // 适配 Vue 项目的路径别名（如果有）
+    }
   },
-  "exclude": ["**/dist/**"]
+  "exclude": [
+    "**/dist/**",
+    "**/node_modules/**"
+  ]
 }

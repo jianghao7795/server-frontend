@@ -52,10 +52,9 @@ export default defineComponent({
         return h("div");
       },
     });
-
     return () => {
       return (
-        <NConfigProvider theme={theme.value} ThemeOverrides={themeOverrides}>
+        <NConfigProvider theme={theme.value} themeOverrides={themeOverrides}>
           <NLoadingBarProvider>
             <div class="view-dark view-comment">
               <NNotificationProvider>

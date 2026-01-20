@@ -1,0 +1,86 @@
+.carouselImg {
+  width: 100%;
+  object-fit: cover;
+}
+
+.headerStyleLine {
+  font-size: 15px;
+  line-height: 35px;
+  max-height: 41px;
+}
+
+.headerStyleLine > b > span {
+  margin-top: 8px;
+}
+
+.darkStyle {
+  background-color: #000;
+  background-position: center;
+  height: auto;
+  width: 100%;
+  background-size: cover;
+  background-attachment: scroll;
+  z-index: 1;
+  margin-bottom: 20px;
+}
+
+.darkStyle > div {
+  background-image: linear-gradient(rgba(75, 75, 75, 1), rgba(255, 255, 255, 0));
+}
+
+.footerStyle {
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+}
+
+.toopli {
+  margin: 0;
+  padding: 0;
+}
+
+.toopli > ul {
+  display: flex;
+  height: 0;
+  margin: 0;
+}
+
+.middleView {
+  min-height: calc(100% - 430px);
+}
+
+.visible {
+  transition: transform 1s;
+  transform: translate3d(0, -200%, 0);
+}
+
+.visibleNo {
+  transition: transform 1s;
+  transform: translate3d(0);
+}
+
+.blankText {
+  min-height: 400px;
+  max-height: 600px;
+}
+
+.search {
+  width: 0px;
+  margin-top: 0px;
+  transition-property: width;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
+  transition-delay: 0s;
+}
+
+.searchLine {
+  width: 200px;
+  display: block;
+}
+
+.disSearch {
+  display: none;
+}

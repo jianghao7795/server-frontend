@@ -236,14 +236,14 @@ export default defineComponent({
     //       handleBack,
     return () => {
       return (
-        <div className={styles["article-list"]}>
-          <NPageHeader back={handleBack}>
+        <div class={styles.articleList}>
+          <NPageHeader onBack={handleBack}>
             <div>
-              <NH4 classname={styles.sortH4}>
+              <NH4 class={styles.sortH4}>
                 <a style={{ color: colorRef.value.time ? "#70a1ff" : undefined }} onClick={() => changeSort("time")}>
                   时间排序
                 </a>
-                <n-divider vertical />
+                <NDivider vertical />
                 <a style={{ color: colorRef.value.read ? "#70a1ff" : undefined }} onClick={() => changeSort("read")}>
                   阅读排序
                 </a>
@@ -253,35 +253,37 @@ export default defineComponent({
               <NList hoverable clickable>
                 {data.value.map((item) => {
                   return (
-                    <NListItem key={item.ID} onClick={() => changeUrl(item.ID)}>
-                      <NThing contentStyle={{ marginTop: "10px" }}>
-                        {{
-                          header: () => (
-                            <div>
-                              <h1>{item.title}</h1>
-                            </div>
-                          ),
-                          description: () => (
-                            <div>
-                              简述:
-                              <span>{item.desc}</span>
-                              <div>阅读量: {item.reading_quantity}</div>
-                              <div>发布于：{calculationTime(item.CreatedAt)}</div>
-                            </div>
-                          ),
-                          footer: () => (
-                            <NSpace size="small" style={{ marginTop: "4px" }}>
-                              {item.tags.map((i) => {
-                                return (
-                                  <NTag bordered={false} size="small" type={colorIndex(i.ID)} key={i.ID}>
-                                    {i.name}
-                                  </NTag>
-                                );
-                              })}
-                            </NSpace>
-                          ),
-                        }}
-                      </NThing>
+                    <NListItem key={item.ID}>
+                      <div onClick={() => changeUrl(item.ID)} style={{ cursor: 'pointer' }}>
+                        <NThing contentStyle={{ marginTop: "10px" }}>
+                          {{
+                            header: () => (
+                              <div>
+                                <h1 class="post-title">{item.title}</h1>
+                              </div>
+                            ),
+                            description: () => (
+                              <div style={{ textAlign: 'center' }}>
+                                简述:
+                                <span>{item.desc}</span>
+                                <div>阅读量: {item.reading_quantity}</div>
+                                <div>发布于：{calculationTime(item.CreatedAt)}</div>
+                              </div>
+                            ),
+                            footer: () => (
+                              <NSpace size="small" style={{ marginTop: "4px" }} justify="center">
+                                {item.tags.map((i) => {
+                                  return (
+                                    <NTag bordered={false} size="small" type={colorIndex(i.ID)} key={i.ID}>
+                                      {i.name}
+                                    </NTag>
+                                  );
+                                })}
+                              </NSpace>
+                            ),
+                          }}
+                        </NThing>
+                      </div>
                     </NListItem>
                   );
                 })}
@@ -290,28 +292,28 @@ export default defineComponent({
               <NEmpty size="large" description="什么也没找到">
                 {{
                   extra: () => (
-                    <n-button size="small" type="primary" onClick={changeLookOther}>
+                    <NButton size="small" type="primary" onClick={changeLookOther}>
                       看看别的文章
-                    </n-button>
+                    </NButton>
                   ),
                 }}
               </NEmpty>
             )}
-            <div className={styles.pageNext}>
-              <n-space justify="space-between">
-                <n-button
+            <div class={styles.pageNext}>
+              <NSpace justify="space-between">
+                <NButton
                   v-show={page.value !== 1}
-                  icon-placement="left"
-                  icon={<Right theme="outline" size="24" fill="#333" />}>
+                  iconPlacement="left"
+                  renderIcon={() => <Right theme="outline" size="24" fill="#333" />}>
                   上一页
-                </n-button>
-                <n-button
-                  icon-placement="right"
+                </NButton>
+                <NButton
+                  iconPlacement="right"
                   v-show={articleLength.value === 10}
-                  icon={<Right theme="outline" size="24" fill="#333" />}>
+                  renderIcon={() => <Right theme="outline" size="24" fill="#333" />}>
                   下一页
-                </n-button>
-              </n-space>
+                </NButton>
+              </NSpace>
             </div>
           </NPageHeader>
         </div>

@@ -36,6 +36,7 @@ export default defineConfig((userConfig) => {
       preprocessorOptions: {
         less: {
           javascriptEnabled: true,
+          additionalData: `@import "@/index.less";`,
         },
       },
     },
