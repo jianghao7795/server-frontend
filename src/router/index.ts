@@ -8,12 +8,12 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => import("@/views/layout/index.tsx"),
+      component: () => import("@/views/layout/index"),
       children: [
         {
           path: "/",
           name: "index",
-          component: () => import("@/views/home/index.tsx"),
+          component: () => import("@/views/home/index"),
           meta: {
             title: "首页",
           },
@@ -37,7 +37,7 @@ const router = createRouter({
         {
           path: "/articles",
           name: "article",
-          component: () => import("@/views/article/index.tsx"),
+          component: () => import("@/views/article/index"),
           meta: {
             title: "文章",
           },
@@ -45,7 +45,7 @@ const router = createRouter({
         {
           path: "/articles/:id",
           name: "id",
-          component: () => import("@/views/article/detail.tsx"),
+          component: () => import("@/views/article/detail"),
           meta: {
             title: "文章详情",
           },

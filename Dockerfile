@@ -1,4 +1,4 @@
-FROM node:18.20.7 AS builder
+FROM node:22.22.0 AS builder
 LABEL org.opencontainers.image.authors="jianghao"
 RUN mkdir -p /app
 WORKDIR /app

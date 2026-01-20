@@ -7,26 +7,28 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "Bundler",
     "strict": true,
     "jsx": "preserve",
     "jsxImportSource": "vue",
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
     "lib": [
       "ESNext",
-      "DOM"
+      "DOM",
+      "DOM.Iterable"
     ],
     "types": [
-      "vite/client",
-      "node"
+      "vite/client"
     ],
     "baseUrl": ".",
     "paths": {
       "@/*": [
         "src/*"
-      ] // 适配 Vue 项目的路径别名（如果有）
+      ]
     }
   },
   "exclude": [

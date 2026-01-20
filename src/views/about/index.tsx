@@ -7,11 +7,11 @@ export default defineComponent({
   setup() {
     const userStore = useUserStore();
     return () => (
-      <div className="view-content">
+      <div class="view-content">
         {userStore.currentUser?.user?.ID && (
           <div>
             <h4>介绍: {userStore.currentUser?.user?.nickName}</h4>
-            <div className="about-content">
+            <div class="about-content">
               <Content imgUrl={userStore.currentUser?.user?.introduction} />
             </div>
           </div>
