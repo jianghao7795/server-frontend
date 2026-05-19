@@ -1,4 +1,4 @@
-import { defineComponent, ref, computed, type PropType, type VNode } from "vue";
+import { defineComponent, ref, computed, watch, type PropType, type VNode } from "vue";
 import { NAvatar, NButton, NInput, NSpace, NPopover } from "naive-ui";
 import dayjs from "dayjs";
 import { useUserStore } from "@/stores/user";
@@ -32,12 +32,20 @@ export default defineComponent({
     const visibleCount = ref(PAGE_SIZE);
     const showEmoji = ref(false);
     const showReplyEmoji = ref(false);
+    const localComments = ref<Comment.comment[]>([...props.comments]);
+
+    watch(
+      () => props.comments,
+      (val) => {
+        localComments.value = [...val];
+      },
+    );
 
     const currentUser = computed(() => userStore.currentUser?.user);
     const isLoggedIn = computed(() => !!userStore.currentUser?.token);
 
-    const visibleComments = computed(() => props.comments.slice(0, visibleCount.value));
-    const hasMore = computed(() => props.comments.length > visibleCount.value);
+    const visibleComments = computed(() => localComments.value.slice(0, visibleCount.value));
+    const hasMore = computed(() => localComments.value.length > visibleCount.value);
 
     const avatarUrl = (headerImg?: string) => (headerImg ? Base_URL + headerImg : "");
 
@@ -115,17 +123,33 @@ export default defineComponent({
         window.$message.warning("请先登录");
         return;
       }
+      const user = currentUser.value!;
       const resp = await createdComment({
         article_id: props.articleId,
         parent_id: 0,
         content: content.value,
-        user_id: currentUser.value!.ID,
+        user_id: user.ID,
         to_user_id: 0,
       });
       if (resp?.code === 200) {
+        const newComment: Comment.comment = {
+          ID: resp.data.id,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          article_id: props.articleId,
+          parentId: 0,
+          content: content.value,
+          user_id: user.ID,
+          user: user,
+          to_user: { ID: 0 } as User.UserInfo,
+          to_user_id: 0,
+          children: [],
+          praises: [],
+          article: {} as API.Article,
+        };
+        localComments.value.unshift(newComment);
         window.$message.success("评论成功");
         content.value = "";
-        emit("refresh");
       }
     };
 
@@ -146,18 +170,39 @@ export default defineComponent({
         window.$message.warning("请先登录");
         return;
       }
+      const user = currentUser.value!;
       const resp = await createdComment({
         article_id: props.articleId,
         parent_id: parent.ID,
         content: replyContent.value,
-        user_id: currentUser.value!.ID,
+        user_id: user.ID,
         to_user_id: parent.user_id,
       });
       if (resp?.code === 200) {
+        const newReply: Comment.comment = {
+          ID: resp.data.id,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          article_id: props.articleId,
+          parentId: parent.ID,
+          content: replyContent.value,
+          user_id: user.ID,
+          user: user,
+          to_user: parent.user,
+          to_user_id: parent.user_id,
+          children: [],
+          praises: [],
+          article: {} as API.Article,
+        };
+        const target = localComments.value.find((c) => c.ID === parent.ID);
+        if (target) {
+          if (!target.children) target.children = [];
+          target.children.push(newReply);
+          expandedChildren.value.add(parent.ID);
+        }
         window.$message.success("回复成功");
         replyId.value = null;
         replyContent.value = "";
-        emit("refresh");
       }
     };
 
@@ -172,11 +217,17 @@ export default defineComponent({
         window.$message.warning("请先登录");
         return;
       }
+      const uid = currentUser.value!.ID;
       const liked = isLiked(item);
       const resp = liked ? await unlikeComment(item.ID) : await likeComment(item.ID);
       if (resp?.code === 200) {
+        if (liked) {
+          item.praises = item.praises?.filter((p) => p.user_id !== uid) ?? [];
+        } else if (resp.data) {
+          if (!item.praises) item.praises = [];
+          item.praises.push(resp.data);
+        }
         window.$message.success(liked ? "已取消点赞" : "点赞成功");
-        emit("refresh");
       }
     };
 
@@ -377,7 +428,7 @@ export default defineComponent({
           <div class={styles.loginTip}>请先登录后再发表评论</div>
         )}
         <div class={styles.commentList}>
-          {props.comments.length === 0 ? (
+          {localComments.value.length === 0 ? (
             <div class={styles.empty}>暂无评论，快来抢沙发吧~</div>
           ) : (
             visibleComments.value.map((item) => renderItem(item))
