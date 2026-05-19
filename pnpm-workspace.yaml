@@ -1,0 +1,5 @@
+allowBuilds:
+  '@apollo/protobufjs': false
+  core-js: false
+  esbuild: false
+  vue-demi: false
