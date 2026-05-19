@@ -374,11 +374,11 @@ export default defineComponent({
       searchInputRef.value?.blur();
     };
 
-    const handleKeydown = (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
-        login();
-      }
-    };
+    // const handleKeydown = (e: KeyboardEvent) => {
+    //   if (e.key === "Enter") {
+    //     login();
+    //   }
+    // };
 
     return () => {
       return (
@@ -389,20 +389,18 @@ export default defineComponent({
                 bordered={false}
                 class={styles.darkStyle}
                 headerStyle={headerStyle}
-                style={{ backgroundImage: colorSet.value }}
-              >
+                style={{ backgroundImage: colorSet.value }}>
                 {{
                   "header-extra": () => (
-                    <div class={[styles.headerStyleLine, visible.value ? styles.visible : styles.visibleNo]} ref={searchRef}>
+                    <div
+                      class={[styles.headerStyleLine, visible.value ? styles.visible : styles.visibleNo]}
+                      ref={searchRef}>
                       <NSpace inline={true} size={0}>
-                        
                         <div class={styles.toopli}>
                           <NInput
                             ref={searchInputRef}
                             value={searchInput.value}
-                      
                             onUpdate:value={(val: string) => (searchInput.value = val)}
-                           
                             placeholder="搜索文章"
                             type="text"
                             onKeyup={(e: KeyboardEvent) => {
@@ -410,8 +408,7 @@ export default defineComponent({
                                 submit();
                               }
                             }}
-                            onBlur={sarchBlur}
-                          >
+                            onBlur={sarchBlur}>
                             {{
                               prefix: () => <NIcon component={Search} />,
                             }}
@@ -426,8 +423,7 @@ export default defineComponent({
                             barWidth={28}
                             justifyContent="space-evenly"
                             tabStyle={{ margin: "0 5px", fontWeight: "bold" }}
-                            onUpdate:value={(e: string) => changePath(e)}
-                          >
+                            onUpdate:value={(e: string) => changePath(e)}>
                             <NTab name="/" tab="首页" />
                             <NTab name="/articles" tab="文章" />
                             <NTab name="/tags" tab="标签" />
@@ -446,8 +442,7 @@ export default defineComponent({
                             placement="bottom-end"
                             trigger="hover"
                             showArrow={true}
-                            onSelect={userLogout}
-                          >
+                            onSelect={userLogout}>
                             <NAvatar round size="small" src={headImage.value}>
                               {{
                                 fallback: () => <img src="/tx.jpg" alt="avatar" />,
@@ -492,16 +487,16 @@ export default defineComponent({
               </footer>
             </NLayoutFooter>
           </NLayout>
-          <NDrawer show={active.value} onUpdate:show={(val: boolean) => (active.value = val)} placement="bottom" height={400}>
+          <NDrawer
+            show={active.value}
+            onUpdate:show={(val: boolean) => (active.value = val)}
+            placement="bottom"
+            height={400}>
             <NDrawerContent title="更换背景图片">
               <NCarousel spaceBetween={30} loop={false} slidesPerView="auto" draggable>
                 {bgImage.value.map((item) => (
                   <NCarouselItem key={item.ID} style="width: 30%">
-                    <NPopconfirm
-                      positiveText="确认"
-                      negativeText="取消"
-                      onPositiveClick={() => changeImages(item)}
-                    >
+                    <NPopconfirm positiveText="确认" negativeText="取消" onPositiveClick={() => changeImages(item)}>
                       {{
                         trigger: () => (
                           <img
@@ -519,7 +514,11 @@ export default defineComponent({
               </NCarousel>
             </NDrawerContent>
           </NDrawer>
-          <NDrawer show={loginStatus.value} onUpdate:show={(val: boolean) => (loginStatus.value = val)} width={502} placement="left">
+          <NDrawer
+            show={loginStatus.value}
+            onUpdate:show={(val: boolean) => (loginStatus.value = val)}
+            width={502}
+            placement="left">
             <NDrawerContent title="登录">
               <NForm
                 model={userInfo.value}
@@ -527,8 +526,7 @@ export default defineComponent({
                 labelPlacement="left"
                 labelWidth="auto"
                 requireMarkPlacement="right-hanging"
-                size="large"
-              >
+                size="large">
                 <NFormItem path="name">
                   <NInput
                     type="text"
@@ -555,7 +553,11 @@ export default defineComponent({
             </NDrawerContent>
           </NDrawer>
           <Register registerStatus={registerStatus.value} onChangeStatus={changeRegisterStatus} />
-          <ResetPassord active={revisePassword.value} onChangeStatus={changeResetPasswordStatus} onResetStore={resetStore} />
+          <ResetPassord
+            active={revisePassword.value}
+            onChangeStatus={changeResetPasswordStatus}
+            onResetStore={resetStore}
+          />
           <Person active={personalInformationStatus.value} onChangeStatus={changePersonalInformationStatus} />
         </div>
       );

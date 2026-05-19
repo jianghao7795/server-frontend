@@ -36,16 +36,12 @@ export default defineComponent({
     const currentUser = computed(() => userStore.currentUser?.user);
     const isLoggedIn = computed(() => !!userStore.currentUser?.token);
 
-    const visibleComments = computed(() =>
-      props.comments.slice(0, visibleCount.value),
-    );
+    const visibleComments = computed(() => props.comments.slice(0, visibleCount.value));
     const hasMore = computed(() => props.comments.length > visibleCount.value);
 
-    const avatarUrl = (headerImg?: string) =>
-      headerImg ? Base_URL + headerImg : "";
+    const avatarUrl = (headerImg?: string) => (headerImg ? Base_URL + headerImg : "");
 
-    const formatDate = (date?: string) =>
-      date ? dayjs(date).format("YYYY-MM-DD HH:mm") : "";
+    const formatDate = (date?: string) => (date ? dayjs(date).format("YYYY-MM-DD HH:mm") : "");
 
     const insertEmoji = (code: string, target: "main" | "reply") => {
       if (target === "main") {
@@ -67,9 +63,7 @@ export default defineComponent({
         if (matches[i]) {
           const src = EMOJI_MAP[matches[i]];
           if (src) {
-            result.push(
-              <img src={src} class={styles.emojiImg} alt={matches[i]} />,
-            );
+            result.push(<img src={src} class={styles.emojiImg} alt={matches[i]} />);
           } else {
             result.push(<span>{matches[i]}</span>);
           }
@@ -78,26 +72,26 @@ export default defineComponent({
       return result;
     };
 
-    const emojiPanel = (
-      <div class={styles.emojiPanel}>
-        {EMOJI_CODES.map((code) => (
-          <span
-            class={styles.emojiItem}
-            key={code}
-            title={code}
-            onClick={(e: MouseEvent) => {
-              const target =
-                (e.currentTarget as HTMLElement).dataset.target === "reply"
-                  ? "reply"
-                  : "main";
-              insertEmoji(code, target);
-            }}
-          >
-            <img src={EMOJI_MAP[code]} alt={code} />
-          </span>
-        ))}
-      </div>
-    );
+    // const emojiPanel = (
+    //   <div class={styles.emojiPanel}>
+    //     {EMOJI_CODES.map((code) => (
+    //       <span
+    //         class={styles.emojiItem}
+    //         key={code}
+    //         title={code}
+    //         onClick={(e: MouseEvent) => {
+    //           const target =
+    //             (e.currentTarget as HTMLElement).dataset.target === "reply"
+    //               ? "reply"
+    //               : "main";
+    //           insertEmoji(code, target);
+    //         }}
+    //       >
+    //         <img src={EMOJI_MAP[code]} alt={code} />
+    //       </span>
+    //     ))}
+    //   </div>
+    // );
 
     const toggleChildren = (id: number) => {
       if (expandedChildren.value.has(id)) {
@@ -179,9 +173,7 @@ export default defineComponent({
         return;
       }
       const liked = isLiked(item);
-      const resp = liked
-        ? await unlikeComment(item.ID)
-        : await likeComment(item.ID);
+      const resp = liked ? await unlikeComment(item.ID) : await likeComment(item.ID);
       if (resp?.code === 200) {
         window.$message.success(liked ? "已取消点赞" : "点赞成功");
         emit("refresh");
@@ -195,49 +187,28 @@ export default defineComponent({
       return (
         <div class={styles.childrenSection}>
           <div class={styles.toggleBtn} onClick={() => toggleChildren(item.ID)}>
-            <span>
-              {expanded ? "收起" : `展开 ${count} 条回复`}
-            </span>
+            <span>{expanded ? "收起" : `展开 ${count} 条回复`}</span>
           </div>
-          {expanded && (
-            <div class={styles.childrenList}>
-              {item.children.map((child) => renderItem(child, true))}
-            </div>
-          )}
+          {expanded && <div class={styles.childrenList}>{item.children.map((child) => renderItem(child, true))}</div>}
         </div>
       );
     };
 
     const renderItem = (item: Comment.comment, isChild = false) => (
-      <div
-        class={[styles.commentItem, isChild && styles.childComment]}
-        key={item.ID}
-      >
+      <div class={[styles.commentItem, isChild && styles.childComment]} key={item.ID}>
         <div class={styles.commentBody}>
-          <NAvatar
-            round
-            size="small"
-            src={avatarUrl(item.user?.headerImg)}
-            object-fit="cover"
-          >
+          <NAvatar round size="small" src={avatarUrl(item.user?.headerImg)} object-fit="cover">
             {{ fallback: () => <img src="/tx.jpg" alt="avatar" /> }}
           </NAvatar>
           <div class={styles.commentContent}>
             <div class={styles.commentHeader}>
-              <span class={styles.userName}>
-                {item.user?.nickName || item.user?.userName}
-              </span>
+              <span class={styles.userName}>{item.user?.nickName || item.user?.userName}</span>
               {item.to_user?.ID !== 0 && (
                 <span class={styles.replyTo}>
-                  回复{" "}
-                  <span class={styles.toUserName}>
-                    {item.to_user.nickName || item.to_user.userName}
-                  </span>
+                  回复 <span class={styles.toUserName}>{item.to_user.nickName || item.to_user.userName}</span>
                 </span>
               )}
-              <span class={styles.commentTime}>
-                {formatDate(item.createdAt)}
-              </span>
+              <span class={styles.commentTime}>{formatDate(item.createdAt)}</span>
             </div>
             <div class={styles.commentText}>{renderContent(item.content)}</div>
             <div class={styles.commentActions}>
@@ -245,12 +216,7 @@ export default defineComponent({
                 <NButton text size="tiny" onClick={() => startReply(item)}>
                   回复
                 </NButton>
-                <NButton
-                  text
-                  size="tiny"
-                  onClick={() => handleLike(item)}
-                  type={isLiked(item) ? "primary" : "default"}
-                >
+                <NButton text size="tiny" onClick={() => handleLike(item)} type={isLiked(item) ? "primary" : "default"}>
                   {{
                     icon: () => (
                       <svg
@@ -262,13 +228,11 @@ export default defineComponent({
                         stroke="currentColor"
                         stroke-width="2"
                         stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
+                        stroke-linejoin="round">
                         <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z" />
                       </svg>
                     ),
-                    default: () =>
-                      `${item.praises?.length > 0 ? ` ${item.praises.length}` : ""}`,
+                    default: () => `${item.praises?.length > 0 ? ` ${item.praises.length}` : ""}`,
                   }}
                 </NButton>
               </NSpace>
@@ -288,14 +252,10 @@ export default defineComponent({
                 <NPopover
                   trigger="click"
                   show={showReplyEmoji.value}
-                  onUpdate:show={(val: boolean) => (showReplyEmoji.value = val)}
-                >
+                  onUpdate:show={(val: boolean) => (showReplyEmoji.value = val)}>
                   {{
                     trigger: () => (
-                      <NButton
-                        size="tiny"
-                        onClick={() => (showReplyEmoji.value = !showReplyEmoji.value)}
-                      >
+                      <NButton size="tiny" onClick={() => (showReplyEmoji.value = !showReplyEmoji.value)}>
                         {{
                           icon: () => (
                             <svg
@@ -305,8 +265,7 @@ export default defineComponent({
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
-                              stroke-width="2"
-                            >
+                              stroke-width="2">
                               <circle cx="12" cy="12" r="10" />
                               <path d="M8 14s1.5 2 4 2 4-2 4-2" />
                               <line x1="9" y1="9" x2="9.01" y2="9" />
@@ -321,21 +280,13 @@ export default defineComponent({
                         class={styles.emojiPanel}
                         data-target="reply"
                         onClick={(e: Event) => {
-                          const el = (e.target as HTMLElement).closest(
-                            `[data-code]`,
-                          ) as HTMLElement | null;
+                          const el = (e.target as HTMLElement).closest(`[data-code]`) as HTMLElement | null;
                           if (el?.dataset.code) {
                             insertEmoji(el.dataset.code, "reply");
                           }
-                        }}
-                      >
+                        }}>
                         {EMOJI_CODES.map((code) => (
-                          <span
-                            class={styles.emojiItem}
-                            key={code}
-                            title={code}
-                            data-code={code}
-                          >
+                          <span class={styles.emojiItem} key={code} title={code} data-code={code}>
                             <img src={EMOJI_MAP[code]} alt={code} />
                           </span>
                         ))}
@@ -344,11 +295,7 @@ export default defineComponent({
                   }}
                 </NPopover>
                 <NSpace>
-                  <NButton
-                    size="tiny"
-                    type="primary"
-                    onClick={() => submitReply(item)}
-                  >
+                  <NButton size="tiny" type="primary" onClick={() => submitReply(item)}>
                     提交
                   </NButton>
                   <NButton size="tiny" onClick={cancelReply}>
@@ -379,15 +326,10 @@ export default defineComponent({
               <NPopover
                 trigger="click"
                 show={showEmoji.value}
-                onUpdate:show={(val: boolean) => (showEmoji.value = val)}
-              >
+                onUpdate:show={(val: boolean) => (showEmoji.value = val)}>
                 {{
                   trigger: () => (
-                    <NButton
-                      size="small"
-                      class={styles.emojiBtn}
-                      onClick={() => (showEmoji.value = !showEmoji.value)}
-                    >
+                    <NButton size="small" class={styles.emojiBtn} onClick={() => (showEmoji.value = !showEmoji.value)}>
                       {{
                         icon: () => (
                           <svg
@@ -397,8 +339,7 @@ export default defineComponent({
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            stroke-width="2"
-                          >
+                            stroke-width="2">
                             <circle cx="12" cy="12" r="10" />
                             <path d="M8 14s1.5 2 4 2 4-2 4-2" />
                             <line x1="9" y1="9" x2="9.01" y2="9" />
@@ -413,21 +354,13 @@ export default defineComponent({
                       class={styles.emojiPanel}
                       data-target="main"
                       onClick={(e: Event) => {
-                        const el = (e.target as HTMLElement).closest(
-                          `[data-code]`,
-                        ) as HTMLElement | null;
+                        const el = (e.target as HTMLElement).closest(`[data-code]`) as HTMLElement | null;
                         if (el?.dataset.code) {
                           insertEmoji(el.dataset.code, "main");
                         }
-                      }}
-                    >
+                      }}>
                       {EMOJI_CODES.map((code) => (
-                        <span
-                          class={styles.emojiItem}
-                          key={code}
-                          title={code}
-                          data-code={code}
-                        >
+                        <span class={styles.emojiItem} key={code} title={code} data-code={code}>
                           <img src={EMOJI_MAP[code]} alt={code} />
                         </span>
                       ))}
