@@ -1,0 +1,163 @@
+.commentSection {
+  margin-top: 24px;
+}
+
+.inputWrapper {
+  margin-bottom: 24px;
+}
+
+.submitBtn {
+  margin-top: 8px;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.emojiBtn {
+  flex-shrink: 0;
+}
+
+.emojiPanel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 8px;
+  max-width: 360px;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.emojiItem {
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 4px;
+  transition: background 0.15s;
+
+  &:hover {
+    background: var(--n-color-embedded);
+  }
+
+  img {
+    width: 28px;
+    height: 28px;
+    display: block;
+  }
+}
+
+.emojiImg {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  display: inline;
+}
+
+.commentList {
+  margin-top: 16px;
+}
+
+.commentItem {
+  margin-bottom: 16px;
+}
+
+.childComment {
+  margin-left: 48px;
+}
+
+.commentBody {
+  display: flex;
+  gap: 12px;
+}
+
+.commentContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.userName {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--n-text-color);
+}
+
+.replyTo {
+  font-size: 12px;
+  color: var(--n-text-color-3);
+}
+
+.toUserName {
+  color: var(--n-color-target);
+}
+
+.commentTime {
+  font-size: 12px;
+  color: var(--n-text-color-3);
+  margin-left: auto;
+}
+
+.commentText {
+  font-size: 14px;
+  line-height: 1.6;
+  word-break: break-word;
+  color: var(--n-text-color);
+}
+
+.commentActions {
+  margin-top: 4px;
+}
+
+.replyInput {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.childrenSection {
+  margin-top: 8px;
+}
+
+.toggleBtn {
+  font-size: 13px;
+  color: var(--n-color-target);
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 0;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.childrenList {
+  margin-top: 8px;
+  padding-left: 4px;
+}
+
+.empty {
+  text-align: center;
+  color: var(--n-text-color-3);
+  padding: 24px 0;
+  font-size: 14px;
+}
+
+.loadMore {
+  text-align: center;
+  padding: 12px 0;
+}
+
+.loginTip {
+  text-align: center;
+  color: var(--n-text-color-3);
+  padding: 16px 0;
+  font-size: 14px;
+  margin-bottom: 16px;
+}

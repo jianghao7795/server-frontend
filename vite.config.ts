@@ -48,6 +48,7 @@ export default defineConfig((userConfig) => {
       hmr: true,
       host: "0.0.0.0",
       port: 3500,
+      allowedHosts: true,
       proxy: {
         // 把key的路径代理到target位置
         // detail: https://cli.vuejs.org/config/#devserver-proxy

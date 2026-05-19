@@ -1,4 +1,4 @@
-FROM node:22.22.0 AS builder
+FROM node:22 AS builder
 LABEL org.opencontainers.image.authors="jianghao"
 RUN mkdir -p /app
 WORKDIR /app
@@ -7,7 +7,7 @@ COPY . /app
 RUN npm config set registry https://registry.npmmirror.com
 RUN npm install -g pnpm
 RUN pnpm config set registry https://registry.npmmirror.com
-RUN pnpm install
+RUN pnpm install --ignore-scripts
 RUN pnpm run build
 
 

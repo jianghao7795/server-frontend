@@ -105,8 +105,7 @@ export default defineComponent({
                   rules={rules.value}
                   labelPlacement="left"
                   labelWidth="auto"
-                  requireMarkPlacement="right-hanging"
-                >
+                  requireMarkPlacement="right-hanging">
                   <NFormItem label="头像" path="header">
                     <NUpload
                       accept=".png,.jpg,.jpeg,.git"

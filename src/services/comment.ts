@@ -11,3 +11,17 @@ export const getArticleComment = (id: number) => {
 export const createdComment = (data: Comment.createcomment) => {
   return http.post<GlobalTypes.Response<{ id: number }>>(`/createdComment`, data);
 };
+
+export const likeComment = (id: number) => {
+  return http.post<GlobalTypes.Response<Comment.Praise>>(`/comment/${id}/like`);
+};
+
+export const unlikeComment = (id: number) => {
+  return http.delete<GlobalTypes.Response<null>>(`/comment/${id}/like`);
+};
+
+export const checkCommentLiked = (id: number) => {
+  return http.get<GlobalTypes.Response<{ liked: boolean; praise: Comment.Praise | null }>>(
+    `/comment/${id}/like`,
+  );
+};
