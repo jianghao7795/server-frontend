@@ -240,13 +240,9 @@ export default defineComponent({
           <NPageHeader onBack={handleBack}>
             <div>
               <NH4 class={styles.sortH4}>
-                <a style={{ color: colorRef.value.time ? "#70a1ff" : undefined }} onClick={() => changeSort("time")}>
-                  时间排序
-                </a>
+                <a style={{ color: colorRef.value.time ? "#70a1ff" : undefined }} onClick={() => changeSort("time")}>时间排序</a>
                 <NDivider vertical />
-                <a style={{ color: colorRef.value.read ? "#70a1ff" : undefined }} onClick={() => changeSort("read")}>
-                  阅读排序
-                </a>
+                <a style={{ color: colorRef.value.read ? "#70a1ff" : undefined }} onClick={() => changeSort("read")}>阅读排序</a>
               </NH4>
             </div>
             {data.value.length !== 0 ? (
