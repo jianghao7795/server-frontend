@@ -1,4 +1,4 @@
-FROM docker.io/library/node:22 AS builder
+FROM docker.io/library/node:22-alpine AS builder
 LABEL org.opencontainers.image.authors="jianghao"
 RUN mkdir -p /app
 WORKDIR /app
@@ -12,7 +12,7 @@ RUN pnpm run build
 
 
 # multi-stage builds
-FROM docker.io/library/nginx:stable
+FROM docker.io/library/nginx:alpine
 LABEL org.opencontainers.image.authors="jianghao"
 
 RUN rm -rf /usr/share/nginx/html/* && mkdir -p /usr/share/nginx/html/frontend
