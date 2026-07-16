@@ -29,3 +29,4 @@ conf/config.conf
 components.d.ts
 pnpm-lock.yaml
 auto-imports.d.ts
+.claude/
