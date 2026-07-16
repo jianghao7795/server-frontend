@@ -22,7 +22,7 @@ export default defineComponent({
     },
   },
   emits: ["refresh"],
-  setup(props, { emit }) {
+  setup(props) {
     const userStore = useUserStore();
     const content = ref("");
     const replyId = ref<number | null>(null);
@@ -279,7 +279,8 @@ export default defineComponent({
                         stroke="currentColor"
                         stroke-width="2"
                         stroke-linecap="round"
-                        stroke-linejoin="round">
+                        stroke-linejoin="round"
+                      >
                         <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z" />
                       </svg>
                     ),
@@ -303,7 +304,8 @@ export default defineComponent({
                 <NPopover
                   trigger="click"
                   show={showReplyEmoji.value}
-                  onUpdate:show={(val: boolean) => (showReplyEmoji.value = val)}>
+                  onUpdate:show={(val: boolean) => (showReplyEmoji.value = val)}
+                >
                   {{
                     trigger: () => (
                       <NButton size="tiny" onClick={() => (showReplyEmoji.value = !showReplyEmoji.value)}>
@@ -316,7 +318,8 @@ export default defineComponent({
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
-                              stroke-width="2">
+                              stroke-width="2"
+                            >
                               <circle cx="12" cy="12" r="10" />
                               <path d="M8 14s1.5 2 4 2 4-2 4-2" />
                               <line x1="9" y1="9" x2="9.01" y2="9" />
@@ -335,7 +338,8 @@ export default defineComponent({
                           if (el?.dataset.code) {
                             insertEmoji(el.dataset.code, "reply");
                           }
-                        }}>
+                        }}
+                      >
                         {EMOJI_CODES.map((code) => (
                           <span class={styles.emojiItem} key={code} title={code} data-code={code}>
                             <img src={EMOJI_MAP[code]} alt={code} />
@@ -377,7 +381,8 @@ export default defineComponent({
               <NPopover
                 trigger="click"
                 show={showEmoji.value}
-                onUpdate:show={(val: boolean) => (showEmoji.value = val)}>
+                onUpdate:show={(val: boolean) => (showEmoji.value = val)}
+              >
                 {{
                   trigger: () => (
                     <NButton size="small" class={styles.emojiBtn} onClick={() => (showEmoji.value = !showEmoji.value)}>
@@ -390,7 +395,8 @@ export default defineComponent({
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            stroke-width="2">
+                            stroke-width="2"
+                          >
                             <circle cx="12" cy="12" r="10" />
                             <path d="M8 14s1.5 2 4 2 4-2 4-2" />
                             <line x1="9" y1="9" x2="9.01" y2="9" />
@@ -409,7 +415,8 @@ export default defineComponent({
                         if (el?.dataset.code) {
                           insertEmoji(el.dataset.code, "main");
                         }
-                      }}>
+                      }}
+                    >
                       {EMOJI_CODES.map((code) => (
                         <span class={styles.emojiItem} key={code} title={code} data-code={code}>
                           <img src={EMOJI_MAP[code]} alt={code} />

@@ -1,14 +1,14 @@
-FROM docker.io/library/node:22-alpine AS builder
+FROM docker.io/oven/bun:1-alpine AS builder
 LABEL org.opencontainers.image.authors="jianghao"
 RUN mkdir -p /app
 WORKDIR /app
 COPY . /app
 
-RUN npm config set registry https://registry.npmmirror.com
-RUN npm install -g pnpm
-RUN pnpm config set registry https://registry.npmmirror.com
-RUN pnpm install --ignore-scripts
-RUN pnpm run build
+# RUN npm config set registry https://registry.npmmirror.com
+# RUN npm install -g pnpm
+# RUN pnpm config set registry https://registry.npmmirror.com
+RUN bun install --registry https://registry.npmmirror.com
+RUN bun run build
 
 
 # multi-stage builds
