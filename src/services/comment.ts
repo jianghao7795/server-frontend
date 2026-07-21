@@ -5,7 +5,7 @@ export const getArticleComment = (id: number) => {
   //   url: "/frontend/getArticleList",
   //   method: "get",
   // });
-  return http.get<GlobalTypes.Response<Comment.comment[]>>(`/getArticleComment/${id}`);
+  return http.get<GlobalTypes.Response<{ data: Comment.comment[] }>>(`/getArticleComment/${id}`);
 };
 
 export const createdComment = (data: Comment.createcomment) => {
@@ -13,7 +13,7 @@ export const createdComment = (data: Comment.createcomment) => {
 };
 
 export const likeComment = (id: number) => {
-  return http.post<GlobalTypes.Response<Comment.Praise>>(`/comment/${id}/like`);
+  return http.post<GlobalTypes.Response<{ data: Comment.Praise }>>(`/comment/${id}/like`);
 };
 
 export const unlikeComment = (id: number) => {
@@ -21,7 +21,5 @@ export const unlikeComment = (id: number) => {
 };
 
 export const checkCommentLiked = (id: number) => {
-  return http.get<GlobalTypes.Response<{ liked: boolean; praise: Comment.Praise | null }>>(
-    `/comment/${id}/like`,
-  );
+  return http.get<GlobalTypes.Response<{ liked: boolean; praise: Comment.Praise | null }>>(`/comment/${id}/like`);
 };

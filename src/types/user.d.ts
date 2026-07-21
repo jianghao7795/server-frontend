@@ -1,8 +1,8 @@
 declare namespace User {
   export type UserInfo = {
-    ID: number;
-    CreatedAt: string;
-    UpdatedAt: string;
+    id: number;
+    created_at: string;
+    updated_at: string;
     uuid: string;
     userName: string;
     nickName: string;

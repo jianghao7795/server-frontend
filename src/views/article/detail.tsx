@@ -1,12 +1,6 @@
 import { defineComponent, onMounted, inject, ref, type Ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import {
-  NAvatar,
-  NTag,
-  NSpace,
-  NDivider,
-  NPageHeader,
-} from "naive-ui";
+import { NAvatar, NTag, NSpace, NDivider, NPageHeader } from "naive-ui";
 import { colorIndex } from "@/common/article";
 import dayjs from "dayjs";
 import { MdPreview } from "md-editor-v3";
@@ -26,9 +20,7 @@ export default defineComponent({
     const theme = inject<Ref<GlobalTheme | null>>("theme");
     const articleStore = useArticleStore();
     const avatar = computed(() =>
-      articleStore.detail?.user?.headerImg
-        ? Base_URL + articleStore.detail?.user?.headerImg
-        : "",
+      articleStore.detail?.user?.head_img ? Base_URL + articleStore.detail?.user?.head_img : "",
     );
     const scrollScreen = ref<HTMLElement | null>(null);
 
@@ -79,20 +71,15 @@ export default defineComponent({
               <NSpace vertical>
                 <div class={styles.imgTxt}>
                   作者：
-                  <NAvatar
-                    round
-                    size="small"
-                    src={avatar.value}
-                    object-fit="cover"
-                  >
+                  <NAvatar round size="small" src={avatar.value} object-fit="cover">
                     {{
                       fallback: () => <img src="/tx.jpg" alt="avatar" />,
                     }}
                   </NAvatar>
                   &nbsp;
-                  {articleStore.detail?.user?.userName}
+                  {articleStore.detail?.user?.name}
                 </div>
-                <div>日期：{changeDate(articleStore.detail?.CreatedAt)}</div>
+                <div>日期：{changeDate(articleStore.detail?.created_at)}</div>
                 <div>阅读量：{articleStore.detail?.reading_quantity}</div>
                 <div>{articleStore.detail?.desc}</div>
               </NSpace>
@@ -113,7 +100,7 @@ export default defineComponent({
           </NPageHeader>
           <div class="view-margin">
             <CommentSection
-              articleId={articleStore.detail.ID}
+              articleId={articleStore.detail.id}
               comments={articleStore.comment}
               onRefresh={refreshComments}
             />

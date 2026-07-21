@@ -54,10 +54,11 @@ export const useArticleStore = defineStore("article", {
     async getList(payload?: API.SearchArticle) {
       this.loading = true;
       const resp = await getArticleList({ ...payload, page: this.page });
+      console.log(resp.data);
       this.loading = false;
-      this.list = [...this.list, ...resp.data?.list];
-      this.total = resp.data.total;
-      if (resp.data?.list?.length === 10) {
+      this.list = [...this.list, ...resp.data];
+      this.total = resp.total;
+      if (resp.data?.length === 10) {
         this.showMore = true;
         this.page++;
       } else {
@@ -68,17 +69,14 @@ export const useArticleStore = defineStore("article", {
 
     async getDetail(payload: { id: number }) {
       const resp = await getArticleDetail(payload.id);
-      if (resp.code === 200) {
-        this.detail = resp.data;
-        this.getComment(payload);
-      }
+      this.detail = resp.data;
+      this.getComment(payload);
     },
 
     async getComment(payload: { id: number }) {
       const respComment = await getArticleComment(payload.id);
-      if (respComment.code === 200) {
-        this.comment = respComment.data;
-      }
+
+      this.comment = respComment.data;
     },
   },
 });

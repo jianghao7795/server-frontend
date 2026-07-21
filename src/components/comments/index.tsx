@@ -128,33 +128,32 @@ export default defineComponent({
         article_id: props.articleId,
         parent_id: 0,
         content: content.value,
-        user_id: user.ID,
+        user_id: user.id,
         to_user_id: 0,
       });
-      if (resp?.code === 200) {
-        const newComment: Comment.comment = {
-          ID: resp.data.id,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-          article_id: props.articleId,
-          parentId: 0,
-          content: content.value,
-          user_id: user.ID,
-          user: user,
-          to_user: { ID: 0 } as User.UserInfo,
-          to_user_id: 0,
-          children: [],
-          praises: [],
-          article: {} as API.Article,
-        };
-        localComments.value.unshift(newComment);
-        window.$message.success("评论成功");
-        content.value = "";
-      }
+
+      const newComment: Comment.comment = {
+        id: resp.id,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+        article_id: props.articleId,
+        parentId: 0,
+        content: content.value,
+        user_id: user.id,
+        user: user,
+        to_user: { id: 0 } as User.UserInfo,
+        to_user_id: 0,
+        children: [],
+        praises: [],
+        article: {} as API.Article,
+      };
+      localComments.value.unshift(newComment);
+      window.$message.success("评论成功");
+      content.value = "";
     };
 
     const startReply = (item: Comment.comment) => {
-      replyId.value = item.ID;
+      replyId.value = item.id;
       replyToUser.value = item.user?.nickName || item.user?.userName || "";
       replyContent.value = "";
     };
@@ -173,42 +172,40 @@ export default defineComponent({
       const user = currentUser.value!;
       const resp = await createdComment({
         article_id: props.articleId,
-        parent_id: parent.ID,
+        parent_id: parent.id,
         content: replyContent.value,
-        user_id: user.ID,
+        user_id: user.id,
         to_user_id: parent.user_id,
       });
-      if (resp?.code === 200) {
-        const newReply: Comment.comment = {
-          ID: resp.data.id,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-          article_id: props.articleId,
-          parentId: parent.ID,
-          content: replyContent.value,
-          user_id: user.ID,
-          user: user,
-          to_user: parent.user,
-          to_user_id: parent.user_id,
-          children: [],
-          praises: [],
-          article: {} as API.Article,
-        };
-        const target = localComments.value.find((c) => c.ID === parent.ID);
-        if (target) {
-          if (!target.children) target.children = [];
-          target.children.push(newReply);
-          expandedChildren.value.add(parent.ID);
-        }
-        window.$message.success("回复成功");
-        replyId.value = null;
-        replyContent.value = "";
+      const newReply: Comment.comment = {
+        id: resp.id,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+        article_id: props.articleId,
+        parentId: parent.id,
+        content: replyContent.value,
+        user_id: user.id,
+        user: user,
+        to_user: parent.user,
+        to_user_id: parent.user_id,
+        children: [],
+        praises: [],
+        article: {} as API.Article,
+      };
+      const target = localComments.value.find((c) => c.id === parent.id);
+      if (target) {
+        if (!target.children) target.children = [];
+        target.children.push(newReply);
+        expandedChildren.value.add(parent.id);
       }
+      window.$message.success("回复成功");
+      replyId.value = null;
+      replyContent.value = "";
     };
 
     const isLiked = (item: Comment.comment) => {
       if (!isLoggedIn.value) return false;
-      const uid = currentUser.value!.ID;
+      const uid = currentUser.value!.id;
       return item.praises?.some((p) => p.user_id === uid) ?? false;
     };
 
@@ -217,27 +214,25 @@ export default defineComponent({
         window.$message.warning("请先登录");
         return;
       }
-      const uid = currentUser.value!.ID;
+      const uid = currentUser.value!.id;
       const liked = isLiked(item);
-      const resp = liked ? await unlikeComment(item.ID) : await likeComment(item.ID);
-      if (resp?.code === 200) {
-        if (liked) {
-          item.praises = item.praises?.filter((p) => p.user_id !== uid) ?? [];
-        } else if (resp.data) {
-          if (!item.praises) item.praises = [];
-          item.praises.push(resp.data);
-        }
-        window.$message.success(liked ? "已取消点赞" : "点赞成功");
+      const resp = liked ? await unlikeComment(item.id) : await likeComment(item.id);
+      if (liked) {
+        item.praises = item.praises?.filter((p) => p.user_id !== uid) ?? [];
+      } else if (resp?.data) {
+        if (!item.praises) item.praises = [];
+        item.praises.push(resp?.data);
       }
+      window.$message.success(liked ? "已取消点赞" : "点赞成功");
     };
 
     const renderChildren = (item: Comment.comment) => {
       if (!item.children?.length) return null;
-      const expanded = expandedChildren.value.has(item.ID);
+      const expanded = expandedChildren.value.has(item.id);
       const count = item.children.length;
       return (
         <div class={styles.childrenSection}>
-          <div class={styles.toggleBtn} onClick={() => toggleChildren(item.ID)}>
+          <div class={styles.toggleBtn} onClick={() => toggleChildren(item.id)}>
             <span>{expanded ? "收起" : `展开 ${count} 条回复`}</span>
           </div>
           {expanded && <div class={styles.childrenList}>{item.children.map((child) => renderItem(child, true))}</div>}
@@ -246,7 +241,7 @@ export default defineComponent({
     };
 
     const renderItem = (item: Comment.comment, isChild = false) => (
-      <div class={[styles.commentItem, isChild && styles.childComment]} key={item.ID}>
+      <div class={[styles.commentItem, isChild && styles.childComment]} key={item.id}>
         <div class={styles.commentBody}>
           <NAvatar round size="small" src={avatarUrl(item.user?.headerImg)} object-fit="cover">
             {{ fallback: () => <img src="/tx.jpg" alt="avatar" /> }}
@@ -254,12 +249,12 @@ export default defineComponent({
           <div class={styles.commentContent}>
             <div class={styles.commentHeader}>
               <span class={styles.userName}>{item.user?.nickName || item.user?.userName}</span>
-              {item.to_user?.ID !== 0 && (
+              {item.to_user?.id !== 0 && (
                 <span class={styles.replyTo}>
                   回复 <span class={styles.toUserName}>{item.to_user.nickName || item.to_user.userName}</span>
                 </span>
               )}
-              <span class={styles.commentTime}>{formatDate(item.createdAt)}</span>
+              <span class={styles.commentTime}>{formatDate(item.created_at)}</span>
             </div>
             <div class={styles.commentText}>{renderContent(item.content)}</div>
             <div class={styles.commentActions}>
@@ -289,7 +284,7 @@ export default defineComponent({
                 </NButton>
               </NSpace>
             </div>
-            {replyId.value === item.ID && (
+            {replyId.value === item.id && (
               <div class={styles.replyInput}>
                 <NInput
                   placeholder={`回复 ${replyToUser.value}...`}

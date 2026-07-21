@@ -10,9 +10,9 @@ export interface Result<T = any> {
   data: T;
 }
 
-const env = import.meta.env;
+// const env = import.meta.env;
 const service: AxiosInstance = axios.create({
-  baseURL: env.VITE_BASE_API,
+  baseURL: "http://192.168.57.47:18000/frontend",
   timeout: 1000,
 });
 
@@ -45,11 +45,12 @@ service.interceptors.response.use(
       emitter.emit("closeLoading");
       return Promise.reject(new Error("服务器错误"));
     }
-    const { code, data } = response.data;
+    const { status, data } = response;
+    // console.log(response);
     // 根据自定义错误码判断请求是否成功
-    if (code === 200) {
+    if (status <= 300) {
       // 将组件用的数据返回
-      return response.data;
+      return data;
     }
 
     return data;
@@ -83,11 +84,11 @@ service.interceptors.response.use(
     // console.log(error.response?.data);
     window.$notification.error({
       content: `错误 ${!!status ? status : ""}: ${message}`,
-      meta: error?.response?.data?.data?.msg  || error.response?.data?.data|| error.response?.data.msg|| error.response?.statusText,
+      meta: message,
       duration: 10000,
       // keepAliveOnHover: true,
     });
-    return { code: status, message };
+    throw { code: status, message };
   },
 );
 

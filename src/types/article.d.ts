@@ -1,8 +1,8 @@
 declare namespace API {
   export type Article = {
-    ID: number;
-    UpdatedAt: string;
-    CreatedAt: string;
+    id: number;
+    updated_at: string;
+    created_at: string;
     content: string;
     desc: string;
     state: 1 | 0;
@@ -15,9 +15,9 @@ declare namespace API {
   };
 
   export type ArticleUser = {
-    userName: string;
-    nickName: string;
-    headerImg: string;
+    name: string;
+    header: string;
+    head_img: string;
   };
 
   // export type initArticle = Partial<Article>;

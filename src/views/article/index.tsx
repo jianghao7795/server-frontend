@@ -39,16 +39,17 @@ export default defineComponent({
     });
 
     return () => {
+      console.log(article.list);
       return (
         <div class={styles.articleList}>
           <NList clickable hoverable style={{ marginButton: 10 }}>
             {article.list.map((item) => (
-              <NListItem key={item.ID}>
+              <NListItem key={item.id}>
                 <NThing contentStyle="margin-top: 10px">
                   {{
                     header: () => (
                       <div>
-                        <h1 class="post-title" onClick={() => changeUrl(item.ID)}>
+                        <h1 class="post-title" onClick={() => changeUrl(item.id)}>
                           {item.title}
                         </h1>
                       </div>
@@ -63,7 +64,7 @@ export default defineComponent({
                           strokeLinecap="square"
                         />
                         &nbsp;
-                        <a>{item.user.nickName}</a>
+                        {/* <a>{item.user.nickName}</a> */}
                         <NDivider vertical />
                         <StopwatchStart
                           theme="outline"
@@ -73,7 +74,7 @@ export default defineComponent({
                           strokeLinecap="square"
                         />
                         &nbsp;
-                        <a>{calculationTime(item.CreatedAt)}</a>
+                        <a>{calculationTime(item.created_at)}</a>
                         <NDivider vertical />
                         <PreviewOpen
                           theme="outline"

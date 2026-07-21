@@ -7,9 +7,9 @@ declare namespace Comment {
   }
 
   export interface comment {
-    ID: number;
-    createdAt: string;
-    updatedAt: string;
+    id: number;
+    created_at: string;
+    updated_at: string;
     article_id: number;
     article: API.Article;
     parentId: number;
